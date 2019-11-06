@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Pool Monitor</title>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link href="/static/bootstrap4.min.css" rel="stylesheet" />
+<link href="/static/bootstrap4-grid.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/static/style.css" />
+<script src="/static/bootstrap4.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="refresh" content="100">
+</head>
+<body>
+<!-- Index template                            -->
+<!-- Used by poolweb.py to generate index page -->
+<div class="container mt-3">
+  <h1>Pool Monitor</h1>
+</div>
+
+<div id="tempstatus" class="container my-5">
+  <div class="row">
+    <div class="col"><p class="temp text-center">{{data['t1']}}&deg;{{data['tu']}}</p><span class="text-muted">Air</span></div>
+    <div class="col"><p class="text-primary temp text-center">{{data['t2']}}&deg;{{data['tu']}}</p><span class="text-muted">Water</span></div>
+  </div>
+</div>
+
+<div id="pumpbuttons" class="container">
+    {% if data['pm']=="on" %}
+      <a href="#" class="btn btn-success disabled round" role="button" aria-pressed="true">ON</a>
+      <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
+      <a href="/off/" class="btn btn-danger" role="button">OFF</a>
+      <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
+    {% elif data['pm']=="off" %}
+      <a href="/on/" class="btn btn-success" role="button">ON</a>
+      <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
+      <a href="#" class="btn btn-danger disabled round" role="button" aria-pressed="true">OFF</a>
+      <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
+    {% elif data['pm']=="boost" %}
+      <a href="/on/" class="btn btn-success" role="button">ON</a>
+      <a href="/boost/" class="btn btn-primary disabled round" role="button" aria-pressed="true">BOOST</a>
+      <a href="#" class="btn btn-danger" role="button">OFF</a>
+      <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
+    {% else %}
+      <a href="/on/" class="btn btn-success" role="button">ON</a>
+      <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
+      <a href="/off/" class="btn btn-danger" role="button">OFF</a>
+      <a href="#" class="btn btn-info disabled round" role="button" aria-pressed="true">AUTO</a>
+    {% endif %}
+</div>
+
+<div id="pumpStatus" class="container my-3">
+  {% if data['pm']=='auto' and data['ps']==True %}
+  <div class="alert alert-info" role="alert">Pump is On</div>
+  {% elif data['pm']=='auto' and data['ps']==False %}
+  <div class="alert alert-info" role="alert">Pump is Off</div>
+  {% elif data['pm']=='boost' %}
+  <div class="alert alert-primary" role="alert">Pump is Boosted</div>
+  {% elif data['ps']==True %}
+  <div class="alert alert-success" role="alert">Pump is On</div>
+  {% else %}
+  <div class="alert alert-danger" role="alert">Pump is Off</div>
+  {% endif %}
+</div>
+
+<div id="flash" class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+</div>
+
+<div id="footnote" class="container">
+  <p>Updated {{ data['ts'] }}</p>
+  <p><a href="/logout" >Logout {{ data['user'] }}</a> | <a href="/schedule/">Edit Schedule</a> | <a href="/debug/">Debug</a></p>
+</div>
+</body>
+</html>
