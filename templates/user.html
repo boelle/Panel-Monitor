@@ -21,34 +21,25 @@
 <div id="tempstatus" class="container my-5">
   <div class="row">
     <div class="col"><p class="temp text-center">{{data['t1']}}&deg;{{data['tu']}}</p><span class="tex$
-    <div class="col"><p class="temp text-center">{{data['t2']}}&deg;{{data['tu']}}</p><span class="tex$
-    <div class="col"><p class="temp text-center">{{data['cu']}}&deg;{{data['tu']}}</p><span class="tex$
     <div class="col"><p class="temp text-center">{{data['tar']}}&deg;{{data['tu']}}</p><span class="te$
     <div class="col"><p class="temp text-center">{{data['ta2']}}&deg;{{data['tu']}}</p><span class="te$
-    <div class="col"><p class="temp text-center">{{data['ta3']}}&deg;{{data['tu']}}</p><span class="te$
   </div>
 </div>
 
+
+
 <div id="pumpbuttons" class="container">
     {% if data['pm']=="on" %}
-      <a href="#" class="btn btn-success disabled round" role="button" aria-pressed="true">ON</a>
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
-      <a href="/off/" class="btn btn-danger" role="button">OFF</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% elif data['pm']=="off" %}
-      <a href="/on/" class="btn btn-success" role="button">ON</a>
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
-      <a href="#" class="btn btn-danger disabled round" role="button" aria-pressed="true">OFF</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% elif data['pm']=="boost" %}
-      <a href="/on/" class="btn btn-success" role="button">ON</a>
       <a href="/boost/" class="btn btn-primary disabled round" role="button" aria-pressed="true">BOOST$
-      <a href="#" class="btn btn-danger" role="button">OFF</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% else %}
-      <a href="/on/" class="btn btn-success" role="button">ON</a>
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
-      <a href="/off/" class="btn btn-danger" role="button">OFF</a>
       <a href="#" class="btn btn-info disabled round" role="button" aria-pressed="true">AUTO</a>
     {% endif %}
 </div>
@@ -83,7 +74,6 @@
 
 <div id="footnote" class="container">
   <p>Updated {{ data['ts'] }}</p>
-  <p><a href="/logout" >Logout {{ data['user'] }}</a> | <a href="/schedule/">Edit Schedule</a> | <a hr$
 </div>
 </body>
 </html>

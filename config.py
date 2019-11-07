@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-#-----------------------------------------------------------
+#-----------------------------------------------------------------
 #    ___  ___  _ ____
 #   / _ \/ _ \(_) __/__  __ __
 #  / , _/ ___/ /\ \/ _ \/ // /
@@ -20,18 +20,24 @@
 # Visit my Raspberry Pi Blog for other awesome content:
 # https://www.raspberrypi-spy.co.uk/
 #
-#-----------------------------------------------------------
+# Modified by Bo Herrmannsen to control a electrical heating panel
+#
+#-----------------------------------------------------------------
 
-# Set temp scale to 
+# Set temp scale to
 # C for Celcius/Centigrade or
 # F for Fahrenheit
 TEMPUNIT='C'
 
+#Sensor id
+id1='take a guess'
+id2='take a guess'
+
 # Set the number of seconds between each loop.
-# This determines how often the system checks the status of the pump.
-LOOPDELAY=60
-# Set the number of loops that pass before data is sent to Thingspeak
-LOOPSENDDATA=5
+# This determines how often data is sent to emoncms.
+LOOPDELAY=10
+# Set the number of loops that pass before the relay is updated
+LOOPSENDDATA=3
 
 # Default username and password hash
 # Use hashgenerator.py in utils to create hash for your password
@@ -41,14 +47,9 @@ USERHASH='c7f9e589934a99848f2dba75a70b49dca6149988730389671d730e9376701adf'
 # Flask needs a secret key or phrase to handle login cookie
 FLASKSECRET='7e8031df78fd55cba971df8d9f5740be'
 
-# Thinkspeak details for public channel
-# to publish temperature data
-# Enter your key below :
-THINGSPEAKKEY=''
-THINGSPEAKURL='https://api.thingspeak.com/update'
-
-# Pushover details for sending reboot notifications
-# Enter your key and User details below :
-PUSHOVERKEY=''
-PUSHOVERUSR=''
-PUSHOVERURL='https://api.pushover.net/1/messages.json'
+# Emoncms
+domain = "take a guess"
+domain1 = "take a guess"
+emoncmspath = "emoncms"
+apikey = "take a guess"
+nodeid = 9922

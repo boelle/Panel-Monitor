@@ -23,6 +23,8 @@
 # Visit my Raspberry Pi Blog for other awesome content:
 # https://www.raspberrypi-spy.co.uk/
 #
+# Modified by Bo Herrmannsen to control a electrical heating panel
+#
 #-----------------------------------------------------------
 import time
 import logging
@@ -37,38 +39,45 @@ logging.info('Main start')
 # if they don't already exist
 p.checkStatus()
 p.checkSchedule()
+p.checkTarget()
+p.checkTarget2()
+p.checkTarget3()
 
 # Get the IDs of the DS18B20 temp sensors
 mySensorIDs=p.getSensorIDs()
-
 # Set number of seconds to wait between loops
 loopDelay=c.LOOPDELAY
-# Set number of loops to wait before sending data to Thingspeak
+# Set number of loops to wait before updating relay
 loopSendData=c.LOOPSENDDATA
 
 loopCounter=0
-
-# Send Pushover notification on boot with IP
-p.sendPushover(c.PUSHOVERURL,c.PUSHOVERUSR,c.PUSHOVERKEY,'50000')
 
 if __name__ == '__main__':
 
   while True:
 
-    # Read current schedule, pump status and mode
-    # as it may have been changed by web interface since last loop
-    myHours=p.getSchedule()
+    # Read temperatures in C or F and send to
+    # Emoncms every 1 loops
+
+    temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
     myPumpMode,myPumpStatus,booststart=p.getStatus()
+    p.sendEmoncms(c.domain,c.domain1,c.apikey,c.emoncmspath,c.nodeid,temp1,temp2,myPumpStatus)
 
-    # Deal with pump based on current mode
-    myPumpStatus=p.pumpUpdate(myPumpMode)
-
-    # Read temperatures in C or F and send to 
-    # Thingspeak every 5 loops
+    # Update relay every 3 loops
     loopCounter+=1
     if loopCounter==loopSendData:
-      temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
-      p.sendThingspeak(c.THINGSPEAKURL,c.THINGSPEAKKEY,'field1','field2',temp1,temp2)
+
+      # Read current schedule, pump status and mode
+      # as it may have been changed by web interface since last loop
+      myHours=p.getSchedule()
+      target=p.getTarget()
+      target2=p.getTarget2()
+      target3=p.getTarget3()
+      myPumpMode,myPumpStatus,booststart=p.getStatus()
+
+      # Deal with pump based on current mode
+      myPumpStatus=p.pumpUpdate(myPumpMode)
+
       loopCounter=0
 
     # Wait before doing it all again

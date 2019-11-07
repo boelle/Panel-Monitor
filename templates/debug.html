@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>RPiSpy Pool Monitor - Debug</title>
+<title>Panel Monitor - Debug</title>
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link href="/static/bootstrap4.min.css" rel="stylesheet" />
@@ -13,7 +13,7 @@
 <!-- Debug template                            -->
 <!-- Used by poolweb.py to generate debug page -->
 <div class="container mt-3">
-  <h1>Debug Page</h1>
+  <h1>Debug</h1>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -39,21 +39,37 @@
         <td>{{data['t2']}}&deg;{{data['tu']}}</td>
       </tr>
       <tr>
-        <td>Pump mode</td>
+        <td>CPU</td>
+        <td>{{data['cu']}}&deg;{{data['tu']}}</td>
+      </tr>
+      <tr>
+        <td>Relay mode</td>
         <td>{{data['pm']}}</td>
       </tr>
       <tr>
-        <td>Pump status</td>
+        <td>Relay status</td>
         <td>{{data['ps']}}</td>
       </tr>
       <tr>
         <td>Schedule</td>
         <td>{{data['hrs']}}</td>
-      </tr>  
+      </tr>
+      <tr>
+        <td>Target</td>
+        <td>{{data['tar']}}</td>
+      </tr>
+      <tr>
+        <td>Boost</td>
+        <td>{{data['ta2']}}</td>
+      </tr>
+      <tr>
+        <td>Cpu Cap</td>
+        <td>{{data['ta3']}}</td>
+      </tr>
       <tr>
         <td>Boost remain</td>
         <td>{{data['br']}}</td>
-      </tr>        
+      </tr>
     </tbody>
   </table>
 

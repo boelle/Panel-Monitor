@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Panel Monitor - Target Temperature</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link href="/static/bootstrap4.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/static/style.css" />
+<script src="/static/bootstrap4.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+<body>
+<!-- Pump schedule template                       -->
+<!-- Used by poolweb.py to generate schedule page -->
+<div class="container mt-3">
+  <h1>Target Temperature</h1>
+
+  <form method=POST>
+    <div class="form-group">
+      <div class="checkbox">
+        <label><input type="checkbox" name="target" value="15" {% if '15' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="16" {% if '16' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="17" {% if '17' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="18" {% if '18' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="19" {% if '19' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="20" {% if '20' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="21" {% if '21' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="22" {% if '22' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="23" {% if '23' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="24" {% if '24' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="25" {% if '25' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="26" {% if '26' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="27" {% if '27' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="28" {% if '28' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="29" {% if '29' in target %}checked{% endif $
+        <label><input type="checkbox" name="target" value="30" {% if '30' in target %}checked{% endif $
+<script>
+$(document).ready(function(){
+    $('input:checkbox').click(function() {
+        $('input:checkbox').not(this).prop('checked', false);
+    });
+});
+</script>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+    <a href="{{ url_for('index') }}" class="btn btn-outline-dark btn-lg" role="button">Back</a>
+  </form>
+
+</div>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="container mt-3">
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+</body>
+</html>
