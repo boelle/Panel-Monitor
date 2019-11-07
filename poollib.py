@@ -79,35 +79,35 @@ def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status):
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Preparing Data for local server')
         conn = http.client.HTTPConnection(domain)
-
+        
         conarg1 = ('/', emoncmspath, '/input/post?node=', str(nodeid), '&csv=', str_join, '&apikey=', apikey)
         conarg = "".join(str(x) for x in conarg1)
 
         conn.request("GET", conarg)
-
+        
         response = conn.getresponse()
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Response from local server:', end=' ')
         print(response.read())
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Data sent to local server')
-
+        
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Preparing Data for hosted server')
         conn = http.client.HTTPConnection(domain1)
-
+        
         conarg1 = ('/', emoncmspath, '/input/post?node=', str(nodeid), '&csv=', str_join, '&apikey=', apikey)
         conarg = "".join(str(x) for x in conarg1)
 
         conn.request("GET", conarg)
-
+        
         response = conn.getresponse()
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Response from hosted server:', end=' ')
         print(response.read())
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Data sent to hosted server')
-
+                        
     except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
@@ -126,7 +126,7 @@ def uptime():
 
     except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))
+        print(' This error occurred: ' + str(ex))   
 
 def cpu():
 
@@ -428,13 +428,21 @@ def pumpUpdate(mode):
     wiringpi.digitalWrite(2, 1) # sets port 2 to ON
 
   if mode=='on':
-    if t1 < target_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
-      status=True
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target: "+target_new)
-      print ("CPU Cap: "+target3_new)
+    if t1 < target_new:
+      if cpu1 < target3_new:
+        wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+        status=True
+        print ("Current Temperature: "+t1)
+        print ("CPU Temperature: "+cpu1)
+        print ("Target: "+target_new)
+        print ("CPU Cap: "+target3_new)
+      else:
+        wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+        status=False
+        print ("Current Temperature: "+t1)
+        print ("CPU Temperature: "+cpu1)
+        print ("Target: "+target_new)
+        print ("CPU Cap: "+target3_new)
     else:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
@@ -453,13 +461,21 @@ def pumpUpdate(mode):
       mode='auto'
       wiringpi.digitalWrite(25, 0) # sets port 25 to OFF (spare LED)
     else:
-      if t1 < target2_new and cpu1 < target3_new:
-        wiringpi.digitalWrite(0, 1) # sets port 0 to ON
-        status=True
-        print ("Current Temperature: "+t1)
-        print ("CPU Temperature: "+cpu1)
-        print ("Target(boost): "+target2_new)
-        print ("CPU Cap: "+target3_new)
+      if t1 < target2_new:
+        if cpu1 < target3_new:
+          wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+          status=True
+          print ("Current Temperature: "+t1)
+          print ("CPU Temperature: "+cpu1)
+          print ("Target(boost): "+target2_new)
+          print ("CPU Cap: "+target3_new)
+        else:
+          wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+          status=False
+          print ("Current Temperature: "+t1)
+          print ("CPU Temperature: "+cpu1)
+          print ("Target(boost): "+target2_new)
+          print ("CPU Cap: "+target3_new)
       else:
         wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
         status=False
@@ -469,20 +485,22 @@ def pumpUpdate(mode):
         print ("CPU Cap: "+target3_new)
   elif mode=='auto':
     now = datetime.datetime.now()
-    if str(now.hour) in hours and t1 < target_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
-      status=True
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target: "+target_new)
-      print ("CPU Cap: "+target3_new)
+    if str(now.hour) in hours:
+      if t1 < target_new:
+        wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+        status=True
+        print ("Current Temperature: "+t1)
+        print ("Target: "+target_new)
+      else:
+        wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+        status=False
+        print ("Current Temperature: "+t1)
+        print ("Target: "+target_new)
     else:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
       print ("Target: "+target_new)
-      print ("CPU Cap: "+target3_new)
   else:
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False

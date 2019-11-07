@@ -25,8 +25,6 @@
 # Visit my Raspberry Pi Blog for other awesome content:
 # https://www.raspberrypi-spy.co.uk/
 #
-# Modified by Bo Herrmannsen to control a electrical heating panel
-#
 #-----------------------------------------------------------
 import time
 import datetime
@@ -120,12 +118,12 @@ def debug():
     target2 = p.getTarget2()
     target3 = p.getTarget3()
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
-
+    
     if mode=="boost":
       boostremain=900+booststart-time.time()
     else:
-      boostremain=0
-
+      boostremain=0  
+    
     data={'id1': sensorIDs[0],
           'id2': sensorIDs[1],
           't1' : temp1,
@@ -240,12 +238,12 @@ def status():
     # system that calls the /status URL. e.g. Home Assistant
     global mySensorIDs,myPumpStatus,myPumpMode
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
-
+    
     if myPumpStatus==True:
         myPumpStatus="On"
     else:
         myPumpStatus="Off"
-
+    
     return jsonify(watertemp=temp1,airtemp=temp2,pumpmode=myPumpMode,pumpstatus=myPumpStatus)
 
 if __name__ == '__main__':

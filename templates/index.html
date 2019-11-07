@@ -20,12 +20,12 @@
 
 <div id="tempstatus" class="container my-5">
   <div class="row">
-    <div class="col"><p class="temp text-center">{{data['t1']}}&deg;{{data['tu']}}</p><span class="tex$
-    <div class="col"><p class="temp text-center">{{data['t2']}}&deg;{{data['tu']}}</p><span class="tex$
-    <div class="col"><p class="temp text-center">{{data['cu']}}&deg;{{data['tu']}}</p><span class="tex$
-    <div class="col"><p class="temp text-center">{{data['tar']}}&deg;{{data['tu']}}</p><span class="te$
-    <div class="col"><p class="temp text-center">{{data['ta2']}}&deg;{{data['tu']}}</p><span class="te$
-    <div class="col"><p class="temp text-center">{{data['ta3']}}&deg;{{data['tu']}}</p><span class="te$
+    <div class="col"><p class="temp text-center">{{data['t1']}}&deg;{{data['tu']}}</p><span class="text-muted">Panel</span></div>
+    <div class="col"><p class="temp text-center">{{data['t2']}}&deg;{{data['tu']}}</p><span class="text-muted">Enclosure</span></div>
+    <div class="col"><p class="temp text-center">{{data['cu']}}&deg;{{data['tu']}}</p><span class="text-muted">CPU</span></div>
+    <div class="col"><p class="temp text-center">{{data['tar']}}&deg;{{data['tu']}}</p><span class="text-muted">Target</span></div>
+    <div class="col"><p class="temp text-center">{{data['ta2']}}&deg;{{data['tu']}}</p><span class="text-muted">Boost</span></div>
+    <div class="col"><p class="temp text-center">{{data['ta3']}}&deg;{{data['tu']}}</p><span class="text-muted">CPU Cap</span></div>
   </div>
 </div>
 
@@ -42,7 +42,7 @@
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% elif data['pm']=="boost" %}
       <a href="/on/" class="btn btn-success" role="button">ON</a>
-      <a href="/boost/" class="btn btn-primary disabled round" role="button" aria-pressed="true">BOOST$
+      <a href="/boost/" class="btn btn-primary disabled round" role="button" aria-pressed="true">BOOST</a>
       <a href="#" class="btn btn-danger" role="button">OFF</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% else %}
@@ -83,7 +83,7 @@
 
 <div id="footnote" class="container">
   <p>Updated {{ data['ts'] }}</p>
-  <p><a href="/logout" >Logout {{ data['user'] }}</a> | <a href="/schedule/">Edit Schedule</a> | <a hr$
+  <p><a href="/logout" >Logout {{ data['user'] }}</a> | <a href="/schedule/">Edit Schedule</a> | <a href="/target/">Edit Target</a> | <a href="/target2/">Edit Boost</a> | <a href="/target3/">Edit CPU Cap</a> | <a href="/debug/">Debug</a></p>
 </div>
 </body>
 </html>

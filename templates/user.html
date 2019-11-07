@@ -20,9 +20,9 @@
 
 <div id="tempstatus" class="container my-5">
   <div class="row">
-    <div class="col"><p class="temp text-center">{{data['t1']}}&deg;{{data['tu']}}</p><span class="tex$
-    <div class="col"><p class="temp text-center">{{data['tar']}}&deg;{{data['tu']}}</p><span class="te$
-    <div class="col"><p class="temp text-center">{{data['ta2']}}&deg;{{data['tu']}}</p><span class="te$
+    <div class="col"><p class="temp text-center">{{data['t1']}}&deg;{{data['tu']}}</p><span class="text-muted">Panel</span></div>
+    <div class="col"><p class="temp text-center">{{data['tar']}}&deg;{{data['tu']}}</p><span class="text-muted">Target</span></div>
+    <div class="col"><p class="temp text-center">{{data['ta2']}}&deg;{{data['tu']}}</p><span class="text-muted">Boost</span></div>
   </div>
 </div>
 
@@ -36,7 +36,7 @@
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% elif data['pm']=="boost" %}
-      <a href="/boost/" class="btn btn-primary disabled round" role="button" aria-pressed="true">BOOST$
+      <a href="/boost/" class="btn btn-primary disabled round" role="button" aria-pressed="true">BOOST</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% else %}
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>

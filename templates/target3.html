@@ -19,22 +19,22 @@
   <form method=POST>
     <div class="form-group">
       <div class="checkbox">
-        <label><input type="checkbox" name="target3" value="30" {% if '30' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="59" {% if '59' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="60" {% if '60' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="61" {% if '61' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="62" {% if '62' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="63" {% if '63' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="64" {% if '64' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="65" {% if '65' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="66" {% if '66' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="67" {% if '67' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="68" {% if '68' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="69" {% if '69' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="70" {% if '70' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="71" {% if '71' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="72" {% if '72' in target3 %}checked{% endi$
-        <label><input type="checkbox" name="target3" value="73" {% if '73' in target3 %}checked{% endi$
+        <label><input type="checkbox" name="target3" value="30" {% if '30' in target3 %}checked{% endif %}>30</label>  
+        <label><input type="checkbox" name="target3" value="59" {% if '59' in target3 %}checked{% endif %}>59</label>  
+        <label><input type="checkbox" name="target3" value="60" {% if '60' in target3 %}checked{% endif %}>60</label>  
+        <label><input type="checkbox" name="target3" value="61" {% if '61' in target3 %}checked{% endif %}>61</label>
+        <label><input type="checkbox" name="target3" value="62" {% if '62' in target3 %}checked{% endif %}>62</label>    
+        <label><input type="checkbox" name="target3" value="63" {% if '63' in target3 %}checked{% endif %}>63</label>  
+        <label><input type="checkbox" name="target3" value="64" {% if '64' in target3 %}checked{% endif %}>64</label>  
+        <label><input type="checkbox" name="target3" value="65" {% if '65' in target3 %}checked{% endif %}>65</label>  
+        <label><input type="checkbox" name="target3" value="66" {% if '66' in target3 %}checked{% endif %}>66</label>  
+        <label><input type="checkbox" name="target3" value="67" {% if '67' in target3 %}checked{% endif %}>67</label>
+        <label><input type="checkbox" name="target3" value="68" {% if '68' in target3 %}checked{% endif %}>68</label>
+        <label><input type="checkbox" name="target3" value="69" {% if '69' in target3 %}checked{% endif %}>69</label>
+        <label><input type="checkbox" name="target3" value="70" {% if '70' in target3 %}checked{% endif %}>70</label>
+        <label><input type="checkbox" name="target3" value="71" {% if '71' in target3 %}checked{% endif %}>71</label>
+        <label><input type="checkbox" name="target3" value="72" {% if '72' in target3 %}checked{% endif %}>72</label>
+        <label><input type="checkbox" name="target3" value="73" {% if '73' in target3 %}checked{% endif %}>73</label>
 <script>
 $(document).ready(function(){
     $('input:checkbox').click(function() {
@@ -42,9 +42,9 @@ $(document).ready(function(){
     });
 });
 </script>
-      </div>
+      </div>  
     </div>
-
+    
     <button type="submit" class="btn btn-primary btn-lg">Save</button>
     <a href="{{ url_for('index') }}" class="btn btn-outline-dark btn-lg" role="button">Back</a>
   </form>
