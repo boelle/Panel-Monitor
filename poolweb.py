@@ -49,6 +49,8 @@ myPumpStatus=False
 def index():
     global mySensorIDs
     if 'username' in session:
+      uptime1=uptime()
+      uptime_new=round(uptime1, 2)
       temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
       cpu1=p.cpu()
       myPumpMode,myPumpStatus,timestamp=p.getStatus()
@@ -73,6 +75,7 @@ def index():
             'tar': target_new,
             'ta2': target2_new,
             'ta3': target3_new,
+            'up': uptime_new,
             'user': escape(session['username'])
             }
       return render_template('index.html',data=data)
@@ -109,6 +112,8 @@ def boost():
 
 @app.route('/debug/')
 def debug():
+    uptime1=uptime()
+    uptime_new=round(uptime1, 2)
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
     cpu1=p.cpu()
     sensorIDs=p.getSensorIDs()
@@ -136,6 +141,7 @@ def debug():
           'tar': target,
           'ta2': target2,
           'ta3': target3,
+          'up': uptime_new,
           'ts' : timeStamp,
           'bt' : booststart,
           'br' : boostremain
