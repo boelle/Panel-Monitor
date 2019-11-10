@@ -429,19 +429,19 @@ def pumpUpdate(mode):
 
   if mode=='on':
     if t1 < target_new and cpu1 < target3_new:
-        wiringpi.digitalWrite(0, 1) # sets port 0 to ON
-        status=True
-        print ("Current Temperature: "+t1)
-        print ("CPU Temperature: "+cpu1)
-        print ("Target: "+target_new)
-        print ("CPU Cap: "+target3_new)
+      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      status=True
+      print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
+      print ("Target: "+target_new)
+      print ("CPU Cap: "+target3_new)
     else:
-        wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
-        status=False
-        print ("Current Temperature: "+t1)
-        print ("CPU Temperature: "+cpu1)
-        print ("Target: "+target_new)
-        print ("CPU Cap: "+target3_new)
+      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      status=False
+      print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
+      print ("Target: "+target_new)
+      print ("CPU Cap: "+target3_new)
   elif mode=='off':
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False
@@ -454,32 +454,26 @@ def pumpUpdate(mode):
       wiringpi.digitalWrite(25, 0) # sets port 25 to OFF (spare LED)
     else:
       if t1 < target2_new and cpu1 < target3_new:
-          wiringpi.digitalWrite(0, 1) # sets port 0 to ON
-          status=True
-          print ("Current Temperature: "+t1)
-          print ("CPU Temperature: "+cpu1)
-          print ("Target(boost): "+target2_new)
-          print ("CPU Cap: "+target3_new)
-        else:
-          wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
-          status=False
-          print ("Current Temperature: "+t1)
-          print ("CPU Temperature: "+cpu1)
-          print ("Target(boost): "+target2_new)
-          print ("CPU Cap: "+target3_new)
-  elif mode=='auto':
-    now = datetime.datetime.now()
-    if str(now.hour) in hours:
-      if t1 < target_new:
         wiringpi.digitalWrite(0, 1) # sets port 0 to ON
         status=True
         print ("Current Temperature: "+t1)
-        print ("Target: "+target_new)
+        print ("CPU Temperature: "+cpu1)
+        print ("Target(boost): "+target2_new)
+        print ("CPU Cap: "+target3_new)
       else:
         wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
         status=False
         print ("Current Temperature: "+t1)
-        print ("Target: "+target_new)
+        print ("CPU Temperature: "+cpu1)
+        print ("Target(boost): "+target2_new)
+        print ("CPU Cap: "+target3_new)
+  elif mode=='auto':
+    now = datetime.datetime.now()
+    if str(now.hour) in hours and t1 < target_new:
+      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      status=True
+      print ("Current Temperature: "+t1)
+      print ("Target: "+target_new)
     else:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
