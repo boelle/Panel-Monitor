@@ -49,7 +49,7 @@ myPumpStatus=False
 def index():
     global mySensorIDs
     if 'username' in session:
-      uptime1=uptime()
+      uptime1=p.uptime()
       uptime_new=round(uptime1, 2)
       temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
       cpu1=p.cpu()
@@ -116,7 +116,7 @@ def boost():
 
 @app.route('/debug/')
 def debug():
-    uptime1=uptime()
+    uptime1=p.uptime()
     uptime_new=round(uptime1, 2)
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
     cpu1=p.cpu()
