@@ -370,7 +370,7 @@ def checkTarget4():
 
     if not os.path.isfile('/home/pi/pool/night.p'):
       print("No night.p file found")
-      saveTarget4(['15'])
+      saveTarget3(['15'])
     else:
       print("Existing night.p file found")
 
@@ -522,29 +522,59 @@ def pumpUpdate(mode):
       status=True
       print ("Current Temperature: "+t1)
       print ("CPU Temperature: "+cpu1)
-      print ("Target(Day): "+target_new)
+      print ("Target (Day): "+target_new)
       print ("CPU Cap: "+target3_new)
-    elif str(now.hour) in hours and t1 < target_new and cpu1 > target3_new:
+    if str(now.hour) in hours and t1 > target_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: "+t1)
       print ("CPU Temperature: "+cpu1)
-      print ("Target(Day): "+target_new)
+      print ("Target (Day): "+target_new)
       print ("CPU Cap: "+target3_new)
-    elif str(now.hour) not in hours and t1 < target4_new and cpu1 < target3_new:
+    if str(now.hour) in hours and t1 < target_new and cpu1 > target3_new:
+      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      status=False
+      print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
+      print ("Target (Day): "+target_new)
+      print ("CPU Cap: "+target3_new)
+    if str(now.hour) in hours and t1 > target_new and cpu1 > target3_new:
+      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      status=False
+      print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
+      print ("Target (Day): "+target_new)
+      print ("CPU Cap: "+target3_new)
+
+ if str(now.hour) not in hours and t1 < target4_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
       print ("Current Temperature: "+t1)
       print ("CPU Temperature: "+cpu1)
-      print ("Target(Night): "+target4_new)
+      print ("Target (Night): "+target_new)
       print ("CPU Cap: "+target3_new)
-    elif str(now.hour) not in hours and t1 < target4_new and cpu1 < target3_new:
+    if str(now.hour) not in hours and t1 > target4_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: "+t1)
       print ("CPU Temperature: "+cpu1)
-      print ("Target(Night): "+target4_new)
+      print ("Target (Night): "+target_new)
       print ("CPU Cap: "+target3_new)
+    if str(now.hour) not in hours and t1 < target4_new and cpu1 > target3_new:
+      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      status=False
+      print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
+      print ("Target (Night): "+target_new)
+      print ("CPU Cap: "+target3_new)
+    if str(now.hour) not in hours and t1 > target4_new and cpu1 > target3_new:
+      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      status=False
+      print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
+      print ("Target (Night): "+target_new)
+      print ("CPU Cap: "+target3_new)
+    
   else:
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False
