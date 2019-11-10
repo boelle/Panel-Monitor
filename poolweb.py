@@ -63,7 +63,10 @@ def index():
       target3 = p.getTarget3()
       for i in range(0, len(target3)):
           target3_new=(target3[i])
-
+      target4 = p.getTarget4()
+      for i in range(0, len(target4)):
+          target4_new=(target4[i])
+        
       timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
       data={'t1': temp1,
             't2': temp2,
@@ -75,6 +78,7 @@ def index():
             'tar': target_new,
             'ta2': target2_new,
             'ta3': target3_new,
+            'ta4': target4_new,
             'up': uptime_new,
             'user': escape(session['username'])
             }
@@ -122,6 +126,7 @@ def debug():
     target = p.getTarget()
     target2 = p.getTarget2()
     target3 = p.getTarget3()
+    target4 = p.getTarget4()
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
     
     if mode=="boost":
@@ -141,6 +146,7 @@ def debug():
           'tar': target,
           'ta2': target2,
           'ta3': target3,
+          'ta4': target4,
           'up': uptime_new,
           'ts' : timeStamp,
           'bt' : booststart,
@@ -228,6 +234,9 @@ def user():
     target2 = p.getTarget2()
     for i in range(0, len(target2)):
         target2_new=(target2[i])
+    target4 = p.getTarget4()
+    for i in range(0, len(target4)):
+        target4_new=(target4[i])        
 
 
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
@@ -238,6 +247,7 @@ def user():
           'ps': myPumpStatus,
           'tar': target_new,
           'ta2': target2_new,
+          'ta4': target4_new,
           'ts': timeStamp
           }
     return render_template('user.html',data=data)
