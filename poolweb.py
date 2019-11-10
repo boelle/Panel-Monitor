@@ -163,7 +163,7 @@ def target():
     if request.method == 'POST':
         target = request.form.getlist("target")
         p.saveTarget(target)
-        flash('Target Temeprature Saved','info')
+        flash('Day Temeprature Saved','info')
     else:
       target=p.getTarget()
     return render_template('target.html',target=target)
@@ -187,6 +187,16 @@ def target3():
     else:
       target3=p.getTarget3()
     return render_template('target3.html',target3=target3)
+
+@app.route('/target4/', methods=['GET','POST'])
+def target4():
+    if request.method == 'POST':
+        target4 = request.form.getlist("target4")
+        p.saveTarget4(target4)
+        flash('Night Temperature Saved','info')
+    else:
+      target4=p.getTarget4()
+    return render_template('target4.html',target4=target4)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
