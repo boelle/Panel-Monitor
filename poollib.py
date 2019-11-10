@@ -63,14 +63,17 @@ def internet_connected(host='8.8.8.8', port=53):
 
     return False
 
-def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status):
+def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode):
 
     try:
         if status==True:
           relay=1
         if status==False:
           relay=0
-        targetnew=target_new()
+        if mode=='boost':
+          targetnew=target_new()
+        if mode=='auto':
+          targetnew=target_new1()        
         cpunew=cpu()
         uptimenew=uptime()
 
@@ -506,3 +509,11 @@ def target_new():
       target_new=(target_x[i])
 
   return target_new
+
+def target_new1():
+
+  target_x=getTarget2()
+  for i in range(0, len(target_x)):
+      target_new1=(target_x[i])
+
+  return target_new1
