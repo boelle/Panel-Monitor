@@ -435,7 +435,7 @@ def pumpUpdate(mode):
         print ("CPU Temperature: "+cpu1)
         print ("Target: "+target_new)
         print ("CPU Cap: "+target3_new)
-      else:
+    else:
         wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
         status=False
         print ("Current Temperature: "+t1)
