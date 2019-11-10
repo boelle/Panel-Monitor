@@ -469,16 +469,20 @@ def pumpUpdate(mode):
         print ("CPU Cap: "+target3_new)
   elif mode=='auto':
     now = datetime.datetime.now()
-    if str(now.hour) in hours and t1 < target_new:
+    if str(now.hour) in hours and t1 < target_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
       print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
       print ("Target: "+target_new)
+      print ("CPU Cap: "+target3_new)
     else:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: "+t1)
+      print ("CPU Temperature: "+cpu1)
       print ("Target: "+target_new)
+      print ("CPU Cap: "+target3_new)
   else:
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False
