@@ -370,7 +370,7 @@ def checkTarget4():
 
     if not os.path.isfile('/home/pi/pool/night.p'):
       print("No night.p file found")
-      saveTarget3(['15'])
+      saveTarget4(['15'])
     else:
       print("Existing night.p file found")
 
