@@ -532,7 +532,7 @@ def pumpUpdate(mode):
       print ("Target (Day): "+target_new)
       print ("CPU Cap: "+target3_new)
     if str(now.hour) in hours and t1 < target_new and cpu1 > target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: "+t1)
       print ("CPU Temperature: "+cpu1)
@@ -561,7 +561,7 @@ def pumpUpdate(mode):
       print ("Target (Night): "+target_new)
       print ("CPU Cap: "+target3_new)
     if str(now.hour) not in hours and t1 < target4_new and cpu1 > target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: "+t1)
       print ("CPU Temperature: "+cpu1)
