@@ -394,8 +394,8 @@ def readTemps(sensorID,tempunit='C'):
       read1=(read1*1.8)+32
       read2=(read2*1.8)+32
 
-    t1='{:.1f}'.format(read1)
-    t2='{:.1f}'.format(read2)
+    t1=read1
+    t2=read2
 
     return t1,t2
     print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -455,18 +455,23 @@ def pumpUpdate(mode):
   hours=getSchedule()
   t1,t2=readTemps(getSensorIDs(),c.TEMPUNIT)
   cpu1=cpu()
+  cpu1=float(cpu1)
   target=getTarget()
   for i in range(0, len(target)):
       target_new=(target[i])
+      target_new=float(target_new)
   target2=getTarget2()
   for i in range(0, len(target2)):
       target2_new=(target2[i])
+      target2_new=float(target2_new)
   target3=getTarget3()
   for i in range(0, len(target3)):
       target3_new=(target3[i])
+      target3_new=float(target3_new)
   target4=getTarget4()
   for i in range(0, len(target4)):
       target4_new=(target4[i])
+      target4_new=float(target4_new)
 
   if internet_connected():
     print(time.asctime( time.localtime(time.time()) ), end=' '),
@@ -480,17 +485,17 @@ def pumpUpdate(mode):
     if t1 < target_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target: "+target_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target: ",target_new)
+      print ("CPU Cap: ",target3_new)
     else:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target: "+target_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target: ",target_new)
+      print ("CPU Cap: ",target3_new)
   elif mode=='off':
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False
@@ -521,60 +526,60 @@ def pumpUpdate(mode):
     if str(now.hour) in hours and t1 < target_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Day): "+target_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Day): ",target_new)
+      print ("CPU Cap: ",target3_new)
     if str(now.hour) in hours and t1 > target_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Day): "+target_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Day): ",target_new)
+      print ("CPU Cap: ",target3_new)
     if str(now.hour) in hours and t1 < target_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Day): "+target_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Day): ",target_new)
+      print ("CPU Cap: ",target3_new)
     if str(now.hour) in hours and t1 > target_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Day): "+target_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Day): ",target_new)
+      print ("CPU Cap: ",target3_new)
 
     if str(now.hour) not in hours and t1 < target4_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Night): "+target4_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Night): ",target4_new)
+      print ("CPU Cap: ",target3_new)
     if str(now.hour) not in hours and t1 > target4_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Night): "+target4_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Night): ",target4_new)
+      print ("CPU Cap: ",target3_new)
     if str(now.hour) not in hours and t1 < target4_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Night): "+target4_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Night): ",target4_new)
+      print ("CPU Cap: ",target3_new)
     if str(now.hour) not in hours and t1 > target4_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
-      print ("Current Temperature: "+t1)
-      print ("CPU Temperature: "+cpu1)
-      print ("Target (Night): "+target4_new)
-      print ("CPU Cap: "+target3_new)
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target (Night): ",target4_new)
+      print ("CPU Cap: ",target3_new)
 
   else:
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
