@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
   while True:
 
-    # Read temperatures in C or F and send to 
+    # Read temperatures in C or F and send to
     # Emoncms every 1 loops
 
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)

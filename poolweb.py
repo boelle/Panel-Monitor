@@ -66,7 +66,7 @@ def index():
       target4 = p.getTarget4()
       for i in range(0, len(target4)):
           target4_new=(target4[i])
-        
+
       timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
       data={'t1': temp1,
             't2': temp2,
@@ -128,12 +128,12 @@ def debug():
     target3 = p.getTarget3()
     target4 = p.getTarget4()
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
-    
+
     if mode=="boost":
       boostremain=900+booststart-time.time()
     else:
-      boostremain=0  
-    
+      boostremain=0
+
     data={'id1': sensorIDs[0],
           'id2': sensorIDs[1],
           't1' : temp1,
@@ -236,7 +236,7 @@ def user():
         target2_new=(target2[i])
     target4 = p.getTarget4()
     for i in range(0, len(target4)):
-        target4_new=(target4[i])        
+        target4_new=(target4[i])
 
 
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
@@ -264,12 +264,12 @@ def status():
     # system that calls the /status URL. e.g. Home Assistant
     global mySensorIDs,myPumpStatus,myPumpMode
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
-    
+
     if myPumpStatus==True:
         myPumpStatus="On"
     else:
         myPumpStatus="Off"
-    
+
     return jsonify(watertemp=temp1,airtemp=temp2,pumpmode=myPumpMode,pumpstatus=myPumpStatus)
 
 if __name__ == '__main__':

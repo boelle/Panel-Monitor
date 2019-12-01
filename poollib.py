@@ -77,7 +77,7 @@ def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode
         if mode=='auto':
           targetnew=target_new2()
         if str(now.hour) in hours and mode=='auto':
-          targetnew=target_new1()        
+          targetnew=target_new1()
         cpunew=cpu()
         uptimenew=uptime()
 
@@ -86,35 +86,35 @@ def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Preparing Data for local server')
         conn = http.client.HTTPConnection(domain)
-        
+
         conarg1 = ('/', emoncmspath, '/input/post?node=', str(nodeid), '&csv=', str_join, '&apikey=', apikey)
         conarg = "".join(str(x) for x in conarg1)
 
         conn.request("GET", conarg)
-        
+
         response = conn.getresponse()
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Response from local server:', end=' ')
         print(response.read())
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Data sent to local server')
-        
+
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Preparing Data for hosted server')
         conn = http.client.HTTPConnection(domain1)
-        
+
         conarg1 = ('/', emoncmspath, '/input/post?node=', str(nodeid), '&csv=', str_join, '&apikey=', apikey)
         conarg = "".join(str(x) for x in conarg1)
 
         conn.request("GET", conarg)
-        
+
         response = conn.getresponse()
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Response from hosted server:', end=' ')
         print(response.read())
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Data sent to hosted server')
-                        
+
     except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
@@ -133,7 +133,7 @@ def uptime():
 
     except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))   
+        print(' This error occurred: ' + str(ex))
 
 def cpu():
 
@@ -193,6 +193,7 @@ def saveTarget(target):
 
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
 def saveTarget2(target2):
@@ -216,7 +217,7 @@ def saveTarget3(target3):
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
-        
+
 def saveTarget4(target4):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -226,7 +227,7 @@ def saveTarget4(target4):
 
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))        
+        print(' This error occurred: ' + str(ex))
 
 def getSchedule():
   try:
@@ -287,7 +288,7 @@ def getTarget4():
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
-        
+
 def checkStatus():
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -376,8 +377,8 @@ def checkTarget4():
 
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))        
-        
+        print(' This error occurred: ' + str(ex))
+
 def readTemps(sensorID,tempunit='C'):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -465,7 +466,7 @@ def pumpUpdate(mode):
       target3_new=(target3[i])
   target4=getTarget4()
   for i in range(0, len(target4)):
-      target4_new=(target4[i])    
+      target4_new=(target4[i])
 
   if internet_connected():
     print(time.asctime( time.localtime(time.time()) ), end=' '),
@@ -574,7 +575,7 @@ def pumpUpdate(mode):
       print ("CPU Temperature: "+cpu1)
       print ("Target (Night): "+target4_new)
       print ("CPU Cap: "+target3_new)
-    
+
   else:
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False
