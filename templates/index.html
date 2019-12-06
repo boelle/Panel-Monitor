@@ -27,8 +27,8 @@
     <div class="col"><p class="temp text-center">{{data['ta4']}}&deg;{{data['tu']}}</p><span class="text-muted">Night Target</span></div>
     <div class="col"><p class="temp text-center">{{data['ta2']}}&deg;{{data['tu']}}</p><span class="text-muted">Boost</span></div>
     <div class="col"><p class="temp text-center">{{data['ta3']}}&deg;{{data['tu']}}</p><span class="text-muted">CPU Cap</span></div>
-	<div class="col"><p class="temp text-center">{{data['taON']}}&deg;{{data['tu']}}</p><span class="text-muted">ON Target</span></div>
-	<div class="col"><p class="temp text-center">{{data['taOF']}}&deg;{{data['tu']}}</p><span class="text-muted">OFF Target</span></div>
+	<div class="col"><p class="temp text-center">{{data['ta5']}}&deg;{{data['tu']}}</p><span class="text-muted">ON Target</span></div>
+	<div class="col"><p class="temp text-center">{{data['ta6']}}&deg;{{data['tu']}}</p><span class="text-muted">OFF Target</span></div>
   </div>
 </div>
 
@@ -86,7 +86,7 @@
 
 <div id="footnote" class="container">
   <p>Updated {{ data['ts'] }} | Uptime {{ data['up'] }} days</p>
-  <p><a href="/logout" >Logout {{ data['user'] }}</a> | <a href="/schedule/">Edit Schedule</a> | <a href="/target/">Edit Day Target</a> | <a href="/target4/">Edit Night Target</a> | <a href="/target2/">Edit Boost Target</a> | <a href="/target3/">Edit CPU Cap</a> | <a href="/targeton/">Edit ON Target</a> | <a href="/targetoff/">Edit OFF Target</a> | <a href="/debug/">Debug</a></p>
+  <p><a href="/logout" >Logout {{ data['user'] }}</a> | <a href="/schedule/">Edit Schedule</a> | <a href="/target/">Edit Day Target</a> | <a href="/target4/">Edit Night Target</a> | <a href="/target2/">Edit Boost Target</a> | <a href="/target3/">Edit CPU Cap</a> | <a href="/target5/">Edit ON Target</a> | <a href="/target6/">Edit OFF Target</a> | <a href="/debug/">Debug</a></p>
 </div>
 </body>
 </html>
