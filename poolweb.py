@@ -70,10 +70,7 @@ def index():
           target4_new=(target4[i])
       target5 = p.getTarget5()
       for i in range(0, len(target5)):
-         target5_new=(target5[i])
-      target6 = p.getTarget6()
-      for i in range(0, len(target6)):
-         target6_new=(target6[i])
+          target5_new=(target5[i])
       
       timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
       data={'t1': temp1,
