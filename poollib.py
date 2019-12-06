@@ -74,6 +74,10 @@ def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode
           relay=0
         if mode=='boost':
           targetnew=target_new()
+        if mode=='off':
+          targetnew=target_new3()
+        if mode=='on':
+          targetnew=target_new4()
         if mode=='auto':
           targetnew=target_new2()
         if str(now.hour) in hours and mode=='auto':
@@ -184,6 +188,28 @@ def saveSchedule(hours):
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
+def saveTargetON(targetON):
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Saving targetON file')
+    pickle.dump( targetON, open( "/home/pi/pool/on.p", "wb" ) )
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def saveTargetOFF(targetOFF):
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Saving targetOFF file')
+    pickle.dump( targetOFF, open( "/home/pi/pool/off.p", "wb" ) )
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
 def saveTarget(target):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -192,7 +218,6 @@ def saveTarget(target):
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
   except Exception as ex:
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
@@ -235,6 +260,30 @@ def getSchedule():
     print(' Getting schedule file')
     hours=pickle.load(open( "/home/pi/pool/schedule.p", "rb" ))
     return hours
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def getTargetON():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Getting targetON file')
+    target=pickle.load(open( "/home/pi/pool/on.p", "rb" ))
+    return targetON
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def getTargetOFF():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Getting targetOFF file')
+    target=pickle.load(open( "/home/pi/pool/off.p", "rb" ))
+    return targetOFF
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
   except Exception as ex:
@@ -314,6 +363,36 @@ def checkSchedule():
       saveSchedule(['7','8'])
     else:
       print("Existing schedule.p file found")
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def checkTargetON():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Checking targetON file')
+
+    if not os.path.isfile('/home/pi/pool/on.p'):
+      print("No on.p file found")
+      saveTarget(['100'])
+    else:
+      print("Existing on.p file found")
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def checkTargetOFF():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Checking targetOFF file')
+
+    if not os.path.isfile('/home/pi/pool/off.p'):
+      print("No off.p file found")
+      saveTarget(['0'])
+    else:
+      print("Existing off.p file found")
 
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -450,7 +529,7 @@ def getSensorIDs():
   return sensorIDs
 
 def pumpUpdate(mode):
-
+  global status
   prevPumpMode,prevPumpStatus,booststart=getStatus()
   hours=getSchedule()
   t1,t2=readTemps(getSensorIDs(),c.TEMPUNIT)
@@ -472,6 +551,14 @@ def pumpUpdate(mode):
   for i in range(0, len(target4)):
       target4_new=(target4[i])
       target4_new=float(target4_new)
+  target5=getTargetOFF()
+  for i in range(0, len(target5)):
+      target5_new=(target5[i])
+      target5_new=float(target5_new)
+  target6=getTargetON()
+  for i in range(0, len(target6)):
+      target6_new=(target6[i])
+      target6_new=float(target6_new)
 
   if internet_connected():
     print(time.asctime( time.localtime(time.time()) ), end=' '),
@@ -482,23 +569,52 @@ def pumpUpdate(mode):
     wiringpi.digitalWrite(2, 1) # sets port 2 to ON
 
   if mode=='on':
-    if t1 < target_new and cpu1 < target3_new:
+    if t1 < target6_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
-      print ("Target: ",target_new)
+      print ("Target: ",target6_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
     else:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
-      print ("Target: ",target_new)
+      print ("Target: ",target6_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
   elif mode=='off':
-    wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
-    status=False
+    if t1 > target5_new and cpu1 < target3_new:
+      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      status=False
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target: ",target5_new)
+      print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
+    if t1 < target5_new and cpu1 < target3_new:
+      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      status=True
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target: ",target5_new)
+      print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
+    else:      
+      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      status=False
+      print ("Current Temperature: ",t1)
+      print ("CPU Temperature: ",cpu1)
+      print ("Target: ",target5_new)
+      print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
   elif mode=='boost':
     wiringpi.digitalWrite(25, 1) # sets port 25 to ON (spare LED)
     if prevPumpMode=='boost' and time.time()-booststart>900:
@@ -514,6 +630,8 @@ def pumpUpdate(mode):
         print ("CPU Temperature: "+cpu1)
         print ("Target(boost): "+target2_new)
         print ("CPU Cap: "+target3_new)
+        print ("Current heat status : ",status)
+        print ("Current relay mode : ",mode)
       else:
         wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
         status=False
@@ -521,6 +639,8 @@ def pumpUpdate(mode):
         print ("CPU Temperature: "+cpu1)
         print ("Target(boost): "+target2_new)
         print ("CPU Cap: "+target3_new)
+        print ("Current heat status : ",status)
+        print ("Current relay mode : ",mode)
   elif mode=='auto':
     now = datetime.datetime.now()
     if str(now.hour) in hours and t1 < target_new and cpu1 < target3_new:
@@ -530,6 +650,8 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Day): ",target_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
     if str(now.hour) in hours and t1 > target_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
@@ -537,6 +659,8 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Day): ",target_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
     if str(now.hour) in hours and t1 < target_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
@@ -544,6 +668,8 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Day): ",target_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
     if str(now.hour) in hours and t1 > target_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
@@ -551,6 +677,8 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Day): ",target_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
 
     if str(now.hour) not in hours and t1 < target4_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
@@ -559,6 +687,8 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Night): ",target4_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
     if str(now.hour) not in hours and t1 > target4_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
@@ -566,6 +696,8 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Night): ",target4_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
     if str(now.hour) not in hours and t1 < target4_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
@@ -573,6 +705,8 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Night): ",target4_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
     if str(now.hour) not in hours and t1 > target4_new and cpu1 > target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
@@ -580,13 +714,12 @@ def pumpUpdate(mode):
       print ("CPU Temperature: ",cpu1)
       print ("Target (Night): ",target4_new)
       print ("CPU Cap: ",target3_new)
+      print ("Current heat status : ",status)
+      print ("Current relay mode : ",mode)
 
   else:
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False
-
-  print("Current heat status : "+str(status))
-  print("Current relay mode : "+mode)
 
   # If there has been a change in state save status
   if status!=prevPumpStatus or mode!=prevPumpMode:
@@ -620,3 +753,19 @@ def target_new2():
       target_new2=(target_x[i])
 
   return target_new2
+
+def target_new3():
+
+  target_x=getTargetOFF()
+  for i in range(0, len(target_x)):
+      target_new3=(target_x[i])
+
+  return target_new3
+  
+def target_new4():
+
+  target_x=getTargetON()
+  for i in range(0, len(target_x)):
+      target_new4=(target_x[i])
+
+  return target_new4

@@ -52,6 +52,8 @@ def index():
       uptime1=p.uptime()
       uptime_new=round(uptime1, 2)
       temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
+      temp1=round(temp1,1)
+      temp2=round(temp2,1)
       cpu1=p.cpu()
       myPumpMode,myPumpStatus,timestamp=p.getStatus()
       target = p.getTarget()
@@ -66,7 +68,13 @@ def index():
       target4 = p.getTarget4()
       for i in range(0, len(target4)):
           target4_new=(target4[i])
-
+      target5=getTargetOFF()
+      for i in range(0, len(target5)):
+         target5_new=(target5[i])
+      target6=getTargetON()
+      for i in range(0, len(target6)):
+      target6_new=(target6[i])
+      
       timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
       data={'t1': temp1,
             't2': temp2,
@@ -79,6 +87,8 @@ def index():
             'ta2': target2_new,
             'ta3': target3_new,
             'ta4': target4_new,
+            'taON': target6_new,
+            'taOFF': target5_new,
             'up': uptime_new,
             'user': escape(session['username'])
             }
@@ -127,6 +137,8 @@ def debug():
     target2 = p.getTarget2()
     target3 = p.getTarget3()
     target4 = p.getTarget4()
+    targetON = p.getTargetON()
+    targetOFF = p.getTargetOFF()
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
 
     if mode=="boost":
@@ -147,6 +159,8 @@ def debug():
           'ta2': target2,
           'ta3': target3,
           'ta4': target4,
+          'taON': targetON,
+          'taOFF': targetOFF,
           'up': uptime_new,
           'ts' : timeStamp,
           'bt' : booststart,
@@ -163,6 +177,26 @@ def schedule():
     else:
       myHours=p.getSchedule()
     return render_template('schedule.html',hours=myHours)
+
+@app.route('/targeton/', methods=['GET','POST'])
+def targetON():
+    if request.method == 'POST':
+        targetON = request.form.getlist("targetON")
+        p.saveTargetON(targetON)
+        flash('ON Temeprature Saved','info')
+    else:
+      targetON=p.getTargetON()
+    return render_template('targeton.html',targetON=targetON)
+    
+@app.route('/targetoff/', methods=['GET','POST'])
+def targetOFF():
+    if request.method == 'POST':
+        targetOFF = request.form.getlist("targetOFF")
+        p.saveTargetOFF(targetOFF)
+        flash('OFF Temeprature Saved','info')
+    else:
+      targetOFF=p.getTargetOFF()
+    return render_template('targetoff.html',target=target)
 
 @app.route('/target/', methods=['GET','POST'])
 def target():
@@ -227,6 +261,8 @@ def login():
 def user():
     global mySensorIDs
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
+    temp1=round(temp1,1)
+    temp2=round(temp2,1)
     myPumpMode,myPumpStatus,timestamp=p.getStatus()
     target = p.getTarget()
     for i in range(0, len(target)):
