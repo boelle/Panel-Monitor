@@ -246,7 +246,7 @@ def saveTarget5(target5):
 def saveTarget6(target6):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Saving targetoff file')
+    print(' Saving target6 file')
     pickle.dump( target6, open( "/home/pi/pool/off.p", "wb" ) )
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
