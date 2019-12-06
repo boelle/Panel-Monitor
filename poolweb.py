@@ -71,6 +71,9 @@ def index():
       target5 = p.getTarget5()
       for i in range(0, len(target5)):
           target5_new=(target5[i])
+      target6 = p.getTarget6()
+      for i in range(0, len(target6)):
+          target6_new=(target6[i])
       
       timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
       data={'t1': temp1,
@@ -84,8 +87,8 @@ def index():
             'ta2': target2_new,
             'ta3': target3_new,
             'ta4': target4_new,
-            'taON': target5_new,
-            'taOFF': target6_new,
+            'ta5': target5_new,
+            'ta6': target6_new,
             'up': uptime_new,
             'user': escape(session['username'])
             }
@@ -226,7 +229,7 @@ def target5():
     return render_template('targeton.html',target5=target5)
     
 @app.route('/targetoff/', methods=['GET','POST'])
-def targeto6():
+def target6():
     if request.method == 'POST':
         target6 = request.form.getlist("target6")
         p.saveTarget6(target6)
