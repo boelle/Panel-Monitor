@@ -68,10 +68,10 @@ def index():
       target4 = p.getTarget4()
       for i in range(0, len(target4)):
           target4_new=(target4[i])
-      target5=getTargetOFF()
+      target5=getTarget5()
       for i in range(0, len(target5)):
          target5_new=(target5[i])
-      target6=getTargetON()
+      target6=getTarget6()
       for i in range(0, len(target6)):
          target6_new=(target6[i])
       
@@ -87,8 +87,8 @@ def index():
             'ta2': target2_new,
             'ta3': target3_new,
             'ta4': target4_new,
-            'taON': target6_new,
-            'taOFF': target5_new,
+            'taON': target5_new,
+            'taOFF': target6_new,
             'up': uptime_new,
             'user': escape(session['username'])
             }
@@ -137,8 +137,8 @@ def debug():
     target2 = p.getTarget2()
     target3 = p.getTarget3()
     target4 = p.getTarget4()
-    targeton = p.getTargetON()
-    targetoff = p.getTargetOFF()
+    target5 = p.getTarget5()
+    target6 = p.getTarget6()
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
 
     if mode=="boost":
@@ -159,8 +159,8 @@ def debug():
           'ta2': target2,
           'ta3': target3,
           'ta4': target4,
-          'taON': targeton,
-          'taOFF': targetoff,
+          'ta5': target5,
+          'ta5': target6,
           'up': uptime_new,
           'ts' : timeStamp,
           'bt' : booststart,
@@ -177,26 +177,6 @@ def schedule():
     else:
       myHours=p.getSchedule()
     return render_template('schedule.html',hours=myHours)
-
-@app.route('/targeton/', methods=['GET','POST'])
-def targeton():
-    if request.method == 'POST':
-        targeton = request.form.getlist("targeton")
-        p.saveTargeton(targeton)
-        flash('ON Temeprature Saved','info')
-    else:
-      targeton=p.getTargeton()
-    return render_template('targeton.html',targetON=targetON)
-    
-@app.route('/targetoff/', methods=['GET','POST'])
-def targetoff():
-    if request.method == 'POST':
-        targetoff = request.form.getlist("targetoff")
-        p.saveTargetoff(targetoff)
-        flash('OFF Temeprature Saved','info')
-    else:
-      targetoff=p.getTargetoff()
-    return render_template('targetoff.html',target=target)
 
 @app.route('/target/', methods=['GET','POST'])
 def target():
@@ -237,6 +217,26 @@ def target4():
     else:
       target4=p.getTarget4()
     return render_template('target4.html',target4=target4)
+
+@app.route('/targeton/', methods=['GET','POST'])
+def target5():
+    if request.method == 'POST':
+        target5 = request.form.getlist("target5")
+        p.saveTarget5(target5)
+        flash('ON Temeprature Saved','info')
+    else:
+      target5=p.getTarget5()
+    return render_template('targeton.html',targetON=targetON)
+    
+@app.route('/targetoff/', methods=['GET','POST'])
+def targeto6():
+    if request.method == 'POST':
+        target6 = request.form.getlist("target6")
+        p.saveTarget6(target6)
+        flash('OFF Temeprature Saved','info')
+    else:
+      target6=p.getTarget6()
+    return render_template('targetoff.html',target=target)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
