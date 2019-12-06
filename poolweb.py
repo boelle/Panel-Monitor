@@ -160,7 +160,7 @@ def debug():
           'ta3': target3,
           'ta4': target4,
           'ta5': target5,
-          'ta5': target6,
+          'ta6': target6,
           'up': uptime_new,
           'ts' : timeStamp,
           'bt' : booststart,
