@@ -43,8 +43,8 @@ p.checkTarget()
 p.checkTarget2()
 p.checkTarget3()
 p.checkTarget4()
-p.checkTargeton()
-p.checkTargetoff()
+p.checkTarget5()
+p.checkTarget6()
 
 # Get the IDs of the DS18B20 temp sensors
 mySensorIDs=p.getSensorIDs()
@@ -77,8 +77,8 @@ if __name__ == '__main__':
       target2=p.getTarget2()
       target3=p.getTarget3()
       target4=p.getTarget4()
-      targeton=p.getTargeton()
-      targetoff=p.getTargetoff()
+      target5=p.getTarget5()
+      target6=p.getTarget6()
       myPumpMode,myPumpStatus,booststart=p.getStatus()
 
       # Deal with pump based on current mode
