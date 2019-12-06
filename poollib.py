@@ -626,19 +626,19 @@ def pumpUpdate(mode):
       if t1 < target2_new and cpu1 < target3_new:
         wiringpi.digitalWrite(0, 1) # sets port 0 to ON
         status=True
-        print ("Current Temperature: "+t1)
-        print ("CPU Temperature: "+cpu1)
-        print ("Target(boost): "+target2_new)
-        print ("CPU Cap: "+target3_new)
+        print ("Current Temperature: ",t1)
+        print ("CPU Temperature: ",cpu1)
+        print ("Target(boost): ",target2_new)
+        print ("CPU Cap: ",target3_new)
         print ("Current heat status : ",status)
         print ("Current relay mode : ",mode)
       else:
         wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
         status=False
-        print ("Current Temperature: "+t1)
-        print ("CPU Temperature: "+cpu1)
-        print ("Target(boost): "+target2_new)
-        print ("CPU Cap: "+target3_new)
+        print ("Current Temperature: ",t1)
+        print ("CPU Temperature: ",cpu1)
+        print ("Target(boost): ",target2_new)
+        print ("CPU Cap: ",target3_new)
         print ("Current heat status : ",status)
         print ("Current relay mode : ",mode)
   elif mode=='auto':
