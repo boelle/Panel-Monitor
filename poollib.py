@@ -188,10 +188,10 @@ def saveSchedule(hours):
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def saveTargetON(targetON):
+def saveTargeton(targeton):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Saving targetON file')
+    print(' Saving targeton file')
     pickle.dump( targetON, open( "/home/pi/pool/on.p", "wb" ) )
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
@@ -199,10 +199,10 @@ def saveTargetON(targetON):
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def saveTargetOFF(targetOFF):
+def saveTargetoff(targetoff):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Saving targetOFF file')
+    print(' Saving targetoff file')
     pickle.dump( targetOFF, open( "/home/pi/pool/off.p", "wb" ) )
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
@@ -266,7 +266,7 @@ def getSchedule():
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def getTargetON():
+def getTargeton():
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Getting targetON file')
@@ -278,7 +278,7 @@ def getTargetON():
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def getTargetOFF():
+def getTargetoff():
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Getting targetOFF file')
@@ -368,7 +368,7 @@ def checkSchedule():
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def checkTargetON():
+def checkTargeton():
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Checking targetON file')
@@ -383,7 +383,7 @@ def checkTargetON():
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def checkTargetOFF():
+def checkTargetoff():
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Checking targetOFF file')
