@@ -218,7 +218,7 @@ def target4():
       target4=p.getTarget4()
     return render_template('target4.html',target4=target4)
 
-@app.route('/targeton/', methods=['GET','POST'])
+@app.route('/target5/', methods=['GET','POST'])
 def target5():
     if request.method == 'POST':
         target5 = request.form.getlist("target5")
@@ -228,7 +228,7 @@ def target5():
       target5=p.getTarget5()
     return render_template('targeton.html',target5=target5)
     
-@app.route('/targetoff/', methods=['GET','POST'])
+@app.route('/target6/', methods=['GET','POST'])
 def target6():
     if request.method == 'POST':
         target6 = request.form.getlist("target6")
