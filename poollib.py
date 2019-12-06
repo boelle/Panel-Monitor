@@ -375,7 +375,7 @@ def checkTargeton():
 
     if not os.path.isfile('/home/pi/pool/on.p'):
       print("No on.p file found")
-      saveTarget(['100'])
+      saveTargeton(['100'])
     else:
       print("Existing on.p file found")
 
@@ -390,7 +390,7 @@ def checkTargetoff():
 
     if not os.path.isfile('/home/pi/pool/off.p'):
       print("No off.p file found")
-      saveTarget(['0'])
+      saveTargetoff(['0'])
     else:
       print("Existing off.p file found")
 
