@@ -226,7 +226,7 @@ def target5():
         flash('ON Temeprature Saved','info')
     else:
       target5=p.getTarget5()
-    return render_template('targeton.html',targetON=targetON)
+    return render_template('targeton.html',target5=target5)
     
 @app.route('/targetoff/', methods=['GET','POST'])
 def targeto6():
@@ -236,7 +236,7 @@ def targeto6():
         flash('OFF Temeprature Saved','info')
     else:
       target6=p.getTarget6()
-    return render_template('targetoff.html',target=target)
+    return render_template('targetoff.html',target6=target6)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
