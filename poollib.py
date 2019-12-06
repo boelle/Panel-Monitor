@@ -192,7 +192,7 @@ def saveTargeton(targeton):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Saving targeton file')
-    pickle.dump( targetON, open( "/home/pi/pool/on.p", "wb" ) )
+    pickle.dump( targeton, open( "/home/pi/pool/on.p", "wb" ) )
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
   except Exception as ex:
@@ -203,7 +203,7 @@ def saveTargetoff(targetoff):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Saving targetoff file')
-    pickle.dump( targetOFF, open( "/home/pi/pool/off.p", "wb" ) )
+    pickle.dump( targetoff, open( "/home/pi/pool/off.p", "wb" ) )
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
   except Exception as ex:
@@ -271,7 +271,7 @@ def getTargeton():
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Getting targetON file')
     target=pickle.load(open( "/home/pi/pool/on.p", "rb" ))
-    return targetON
+    return targeton
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
   except Exception as ex:
@@ -283,7 +283,7 @@ def getTargetoff():
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Getting targetOFF file')
     target=pickle.load(open( "/home/pi/pool/off.p", "rb" ))
-    return targetOFF
+    return targetoff
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
   except Exception as ex:

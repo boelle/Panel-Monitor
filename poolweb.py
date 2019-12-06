@@ -137,8 +137,8 @@ def debug():
     target2 = p.getTarget2()
     target3 = p.getTarget3()
     target4 = p.getTarget4()
-    targetON = p.getTargetON()
-    targetOFF = p.getTargetOFF()
+    targeton = p.getTargetON()
+    targetoff = p.getTargetOFF()
     timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
 
     if mode=="boost":
@@ -159,8 +159,8 @@ def debug():
           'ta2': target2,
           'ta3': target3,
           'ta4': target4,
-          'taON': targetON,
-          'taOFF': targetOFF,
+          'taON': targeton,
+          'taOFF': targetoff,
           'up': uptime_new,
           'ts' : timeStamp,
           'bt' : booststart,
@@ -179,23 +179,23 @@ def schedule():
     return render_template('schedule.html',hours=myHours)
 
 @app.route('/targeton/', methods=['GET','POST'])
-def targetON():
+def targeton():
     if request.method == 'POST':
-        targetON = request.form.getlist("targetON")
-        p.saveTargetON(targetON)
+        targeton = request.form.getlist("targeton")
+        p.saveTargeton(targeton)
         flash('ON Temeprature Saved','info')
     else:
-      targetON=p.getTargetON()
+      targeton=p.getTargeton()
     return render_template('targeton.html',targetON=targetON)
     
 @app.route('/targetoff/', methods=['GET','POST'])
-def targetOFF():
+def targetoff():
     if request.method == 'POST':
-        targetOFF = request.form.getlist("targetOFF")
-        p.saveTargetOFF(targetOFF)
+        targetoff = request.form.getlist("targetoff")
+        p.saveTargetoff(targetoff)
         flash('OFF Temeprature Saved','info')
     else:
-      targetOFF=p.getTargetOFF()
+      targetoff=p.getTargetoff()
     return render_template('targetoff.html',target=target)
 
 @app.route('/target/', methods=['GET','POST'])
