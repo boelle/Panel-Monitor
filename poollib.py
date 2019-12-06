@@ -188,28 +188,6 @@ def saveSchedule(hours):
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def saveTargeton(targeton):
-  try:
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Saving targeton file')
-    pickle.dump( targeton, open( "/home/pi/pool/on.p", "wb" ) )
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-
-  except Exception as ex:
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))
-
-def saveTargetoff(targetoff):
-  try:
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Saving targetoff file')
-    pickle.dump( targetoff, open( "/home/pi/pool/off.p", "wb" ) )
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-
-  except Exception as ex:
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))
-
 def saveTarget(target):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -254,36 +232,34 @@ def saveTarget4(target4):
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
+def saveTarget5(target5):
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Saving target5 file')
+    pickle.dump( target5, open( "/home/pi/pool/on.p", "wb" ) )
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def saveTarget6(target6):
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Saving targetoff file')
+    pickle.dump( target6, open( "/home/pi/pool/off.p", "wb" ) )
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
 def getSchedule():
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Getting schedule file')
     hours=pickle.load(open( "/home/pi/pool/schedule.p", "rb" ))
     return hours
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-
-  except Exception as ex:
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))
-
-def getTargeton():
-  try:
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Getting targetON file')
-    target=pickle.load(open( "/home/pi/pool/on.p", "rb" ))
-    return targeton
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-
-  except Exception as ex:
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))
-
-def getTargetoff():
-  try:
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Getting targetOFF file')
-    target=pickle.load(open( "/home/pi/pool/off.p", "rb" ))
-    return targetoff
     print(time.asctime( time.localtime(time.time()) ), end=' ')
 
   except Exception as ex:
@@ -338,6 +314,30 @@ def getTarget4():
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
+def getTarget5():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Getting target5 file')
+    target5=pickle.load(open( "/home/pi/pool/on.p", "rb" ))
+    return target5
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def getTarget6():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Getting target6 file')
+    target6=pickle.load(open( "/home/pi/pool/off.p", "rb" ))
+    return target6
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
 def checkStatus():
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -363,36 +363,6 @@ def checkSchedule():
       saveSchedule(['7','8'])
     else:
       print("Existing schedule.p file found")
-
-  except Exception as ex:
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))
-
-def checkTargeton():
-  try:
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Checking targetON file')
-
-    if not os.path.isfile('/home/pi/pool/on.p'):
-      print("No on.p file found")
-      saveTargeton(['100'])
-    else:
-      print("Existing on.p file found")
-
-  except Exception as ex:
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' This error occurred: ' + str(ex))
-
-def checkTargetoff():
-  try:
-    print(time.asctime( time.localtime(time.time()) ), end=' ')
-    print(' Checking targetOFF file')
-
-    if not os.path.isfile('/home/pi/pool/off.p'):
-      print("No off.p file found")
-      saveTargetoff(['0'])
-    else:
-      print("Existing off.p file found")
 
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -453,6 +423,36 @@ def checkTarget4():
       saveTarget4(['15'])
     else:
       print("Existing night.p file found")
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def checkTarget5():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Checking target5 file')
+
+    if not os.path.isfile('/home/pi/pool/on.p'):
+      print("No on.p file found")
+      saveTarget5(['100'])
+    else:
+      print("Existing on.p file found")
+
+  except Exception as ex:
+        print(time.asctime( time.localtime(time.time()) ), end=' ')
+        print(' This error occurred: ' + str(ex))
+
+def checkTarget6():
+  try:
+    print(time.asctime( time.localtime(time.time()) ), end=' ')
+    print(' Checking target6 file')
+
+    if not os.path.isfile('/home/pi/pool/off.p'):
+      print("No off.p file found")
+      saveTarget6(['0'])
+    else:
+      print("Existing off.p file found")
 
   except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
@@ -551,15 +551,15 @@ def pumpUpdate(mode):
   for i in range(0, len(target4)):
       target4_new=(target4[i])
       target4_new=float(target4_new)
-  target5=getTargetOFF()
+  target5=getTarget5()
   for i in range(0, len(target5)):
       target5_new=(target5[i])
       target5_new=float(target5_new)
-  target6=getTargetON()
+  target6=getTarget6()
   for i in range(0, len(target6)):
       target6_new=(target6[i])
       target6_new=float(target6_new)
-
+  
   if internet_connected():
     print(time.asctime( time.localtime(time.time()) ), end=' '),
     print (" We have an internet connection? " + str(internet_connected()))
@@ -569,12 +569,12 @@ def pumpUpdate(mode):
     wiringpi.digitalWrite(2, 1) # sets port 2 to ON
 
   if mode=='on':
-    if t1 < target6_new and cpu1 < target3_new:
+    if t1 < target5_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
-      print ("Target: ",target6_new)
+      print ("Target: ",target5_new)
       print ("CPU Cap: ",target3_new)
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
@@ -583,26 +583,26 @@ def pumpUpdate(mode):
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
-      print ("Target: ",target6_new)
+      print ("Target: ",target5_new)
       print ("CPU Cap: ",target3_new)
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
   elif mode=='off':
-    if t1 > target5_new and cpu1 < target3_new:
+    if t1 > target6_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
-      print ("Target: ",target5_new)
+      print ("Target: ",target6_new)
       print ("CPU Cap: ",target3_new)
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
-    if t1 < target5_new and cpu1 < target3_new:
+    if t1 < target6_new and cpu1 < target3_new:
       wiringpi.digitalWrite(0, 1) # sets port 0 to ON
       status=True
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
-      print ("Target: ",target5_new)
+      print ("Target: ",target6_new)
       print ("CPU Cap: ",target3_new)
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
@@ -756,7 +756,7 @@ def target_new2():
 
 def target_new3():
 
-  target_x=getTargetOFF()
+  target_x=getTarget6()
   for i in range(0, len(target_x)):
       target_new3=(target_x[i])
 
@@ -764,7 +764,7 @@ def target_new3():
   
 def target_new4():
 
-  target_x=getTargetON()
+  target_x=getTarget5()
   for i in range(0, len(target_x)):
       target_new4=(target_x[i])
 
