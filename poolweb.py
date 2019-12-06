@@ -68,10 +68,10 @@ def index():
       target4 = p.getTarget4()
       for i in range(0, len(target4)):
           target4_new=(target4[i])
-      target5=getTarget5()
+      target5 = p.getTarget5()
       for i in range(0, len(target5)):
          target5_new=(target5[i])
-      target6=getTarget6()
+      target6 = p.getTarget6()
       for i in range(0, len(target6)):
          target6_new=(target6[i])
       
