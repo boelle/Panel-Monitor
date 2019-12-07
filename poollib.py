@@ -559,7 +559,7 @@ def pumpUpdate(mode):
   for i in range(0, len(target6)):
       target6_new=(target6[i])
       target6_new=float(target6_new)
-  
+
   if internet_connected():
     print(time.asctime( time.localtime(time.time()) ), end=' '),
     print (" We have an internet connection? " + str(internet_connected()))
@@ -606,7 +606,7 @@ def pumpUpdate(mode):
       print ("CPU Cap: ",target3_new)
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
-    else:      
+    else:
       wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
       status=False
       print ("Current Temperature: ",t1)
@@ -761,7 +761,7 @@ def target_new3():
       target_new3=(target_x[i])
 
   return target_new3
-  
+
 def target_new4():
 
   target_x=getTarget5()
