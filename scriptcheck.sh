@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if pgrep -f "python3 /home/pi/pool/poolmain.py" &>/dev/null; then
-    echo "it is already running"
+    echo "Main script running"
     exit
 else
-    echo "starting"
+    echo "starting main script"
     stdbuf -oL sudo python3 /home/pi/pool/poolmain.py >/dev/null  &
 fi
