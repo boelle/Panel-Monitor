@@ -38,7 +38,7 @@ app = Flask(__name__)
 app.secret_key = c.FLASKSECRET
 
 logFormat='%(asctime)s %(levelname)s:%(message)s'
-logging.basicConfig(format=logFormat,filename='/home/pi/pool/logs/web.log',level=logging.DEBUG)
+logging.basicConfig(format=logFormat,filename='/home/pi/pool/logs/web.log',level=logging.WARNING)
 logging.info('Web start')
 
 mySensorIDs=[]
