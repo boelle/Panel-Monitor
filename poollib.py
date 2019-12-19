@@ -123,7 +123,7 @@ def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def sendEmoncms1(domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode):
+def sendEmoncms1(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode):
 
     try:
         hours=getSchedule()
