@@ -14,8 +14,13 @@ echo "Performing Network check for $wlan"
 if [ $? -ge 1 ] ; then
     echo -n "Current time : $(date) "
     echo "Network connection down! Attempting reconnection."
+    echo "Stopping wlan0"
     ip link set wlan0 down
+    echo -n "Current time : $(date) "
+    echo "Waiting for 5 Sec"
     sleep 5
+    echo -n "Current time : $(date) "
+    echo "Starting wlan0"
     ip link set wlan0 up
 else
     echo -n "Current time : $(date) "
