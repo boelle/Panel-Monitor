@@ -63,7 +63,7 @@ def internet_connected(host='8.8.8.8', port=53):
 
     return False
 
-def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode):
+def sendEmoncms(domain,apikey,emoncmspath,nodeid,temp1,temp2,status,mode):
 
     try:
         hours=getSchedule()
@@ -102,28 +102,12 @@ def sendEmoncms(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode
         print(response.read())
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' Data sent to local server')
-
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' Preparing Data for hosted server')
-        conn = http.client.HTTPConnection(domain1)
-
-        conarg1 = ('/', emoncmspath, '/input/post?node=', str(nodeid), '&csv=', str_join, '&apikey=', apikey)
-        conarg = "".join(str(x) for x in conarg1)
-
-        conn.request("GET", conarg)
-
-        response = conn.getresponse()
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' Response from hosted server:', end=' ')
-        print(response.read())
-        print(time.asctime( time.localtime(time.time()) ), end=' ')
-        print(' Data sent to hosted server')
-
+        
     except Exception as ex:
         print(time.asctime( time.localtime(time.time()) ), end=' ')
         print(' This error occurred: ' + str(ex))
 
-def sendEmoncms1(domain,domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode):
+def sendEmoncms1(domain1,apikey,emoncmspath,nodeid,temp1,temp2,status,mode):
 
     try:
         hours=getSchedule()
