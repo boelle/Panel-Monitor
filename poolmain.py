@@ -32,7 +32,7 @@ import config as c
 import poollib as p
 
 logFormat='%(asctime)s %(levelname)s:%(message)s'
-logging.basicConfig(format=logFormat,filename='/home/pi/pool/logs/main.log',level=logging.DEBUG)
+logging.basicConfig(format=logFormat,filename='/home/pi/pool/logs/main.log',level=logging.WARNING)
 logging.info('Main start')
 
 # Check current saved status and create pickle files
