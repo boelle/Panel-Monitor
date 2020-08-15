@@ -65,8 +65,7 @@ if __name__ == '__main__':
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
     myPumpMode,myPumpStatus,booststart=p.getStatus()
     p.sendEmoncms(c.domain,c.apikey,c.emoncmspath,c.nodeid,temp1,temp2,myPumpStatus,myPumpMode)
-    p.sendEmoncms1(c.domain1,c.apikey,c.emoncmspath,c.nodeid,temp1,temp2,myPumpStatus,myPumpMode)
-    
+
     # Update relay every 3 loops
     loopCounter+=1
     if loopCounter==loopSendData:
