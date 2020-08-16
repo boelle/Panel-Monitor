@@ -389,7 +389,7 @@ def checkTarget3():
 
     if not os.path.isfile('/home/pi/pool/cpu.p'):
       print("No cpu.p file found")
-      saveTarget3(['50'])
+      saveTarget3(['65'])
     else:
       print("Existing cpu.p file found")
 
