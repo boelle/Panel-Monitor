@@ -707,11 +707,14 @@ def pumpUpdate(mode):
 
   # If there has been a change in state save status
   if status!=prevPumpStatus or mode!=prevPumpMode:
-    booststart=time.time()
+    if prevPumpMode!='boost' and mode=='boost':
+	  booststart=time.time()
+	  print("BOST JUST STARTED")
     saveStatus(mode,status,booststart)
+	print("Change in status so saving")
   else:
     print("No change in status so don't save")
-
+    
   return status
 
 def target_new():
