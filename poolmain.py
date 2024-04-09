@@ -59,9 +59,8 @@ if __name__ == '__main__':
 
   while True:
 
-    # Read temperatures in C or F and send to
-    # Emoncms every 1 loops
-
+    # Read temperatures in C or F
+    
     temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
     myPumpMode,myPumpStatus,booststart=p.getStatus()
 
