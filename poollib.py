@@ -661,16 +661,16 @@ def pumpUpdate(mode):
     wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
     status=False
 
-  # If there has been a change in state save status
+# If there has been a change in state save status
   if status!=prevPumpStatus or mode!=prevPumpMode:
     if prevPumpMode!='boost' and mode=='boost':
-	  booststart=time.time()
-	  print("BOST JUST STARTED")
+          booststart=time.time()
+          print("BOST JUST STARTED")
     saveStatus(mode,status,booststart)
-	print("Change in status so saving")
+    print("Change in status so saving")
   else:
     print("No change in status so don't save")
-    
+
   return status
 
 def target_new():
