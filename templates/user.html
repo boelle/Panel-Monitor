@@ -32,15 +32,19 @@
 <div id="pumpbuttons" class="container">
     {% if data['pm']=="on" %}
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
+      <a href="/off/" class="btn btn-danger" role="button">OFF</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% elif data['pm']=="off" %}
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
+      <a href="#" class="btn btn-danger disabled round" role="button" aria-pressed="true">OFF</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% elif data['pm']=="boost" %}
       <a href="/boost/" class="btn btn-primary disabled round" role="button" aria-pressed="true">BOOST</a>
+      <a href="#" class="btn btn-danger" role="button">OFF</a>
       <a href="/auto/" class="btn btn-info" role="button">AUTO</a>
     {% else %}
       <a href="/boost/" class="btn btn-primary" role="button">BOOST</a>
+      <a href="/off/" class="btn btn-danger" role="button">OFF</a>
       <a href="#" class="btn btn-info disabled round" role="button" aria-pressed="true">AUTO</a>
     {% endif %}
 </div>
