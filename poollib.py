@@ -32,20 +32,26 @@ import os
 import time
 import datetime
 import pickle
-import requests
 import config as c
-import wiringpi
+import RPi.GPIO as GPIO
 import sys, string
 import http.client
 import socket
 
-# wiringpi numbers
+# RPi.GPIO numbers
 
-wiringpi.wiringPiSetup()
-wiringpi.pinMode(0, 1)  # sets pin 0 to output (GPIO 17, Actual hardware pin number is 11) (Relay)
-wiringpi.pinMode(2, 1)  # sets pin 2 to output (GPIO 27, Actual hardware pin number is 13) (Internet connection LED)
-wiringpi.pinMode(25, 1)  # sets pin 25 to output (GPIO 26, Actual hardware pin number is 37) (Spare LED)
-wiringpi.pinMode(3, 0)  # sets pin 3 to input (GPIO 22, Actual hardware pin number is 15) (latching button)
+relay = 11
+boost_switch = 15
+internet_led = 13
+boost_led = 37
+
+GPIO.setmode(GPIO.BOARD)                    # Use hardware pin numbers, listed above
+GPIO.setwarnings(False)                     # Disregard warnings
+
+GPIO.setup(relay, GPIO.OUT)                 # Sets pin 11 as output
+GPIO.setup(boost_switch, GPIO.IN)           # Sets pin 15 as input
+GPIO.setup(internet_led, GPIO.OUT)          # Sets pin 13 as output
+GPIO.setup(boost_led, GPIO.OUT)             # Sets pin 37 as output
 
 def internet_connected(host='8.8.8.8', port=53):
     """
@@ -402,7 +408,7 @@ def readTemps(sensorID,tempunit='C'):
   try:
     print(time.asctime( time.localtime(time.time()) ), end=' ')
     print(' Reading Temperatures')
-    read1=getTemp(sensorID[0])/float(1000)
+    read1 = getTemp(sensorID[0]) /float(1000)
     read2 = getTemp(sensorID[1]) / float(1000)
 
     if tempunit.upper()=='F':
@@ -503,14 +509,14 @@ def pumpUpdate(mode):
   if internet_connected():
     print(time.asctime( time.localtime(time.time()) ), end=' '),
     print (" We have an internet connection? " + str(internet_connected()))
-    wiringpi.digitalWrite(2, 0) # sets port 2 to OFF
+    GPIO.output(internet_led, GPIO.LOW) # Turns internet led to OFF
   else:
     print (" Check internet Connection")
-    wiringpi.digitalWrite(2, 1) # sets port 2 to ON
+    GPIO.output(internet_led, GPIO.HIGH) # Turns internet led to ON
 
   if mode=='on':
     if t1 < target5_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      GPIO.output(relay, GPIO.HIGH) # Turns relay ON
       status=True
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -519,7 +525,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     else:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -529,7 +535,7 @@ def pumpUpdate(mode):
       print ("Current relay mode : ",mode)
   elif mode=='off':
     if t1 > target6_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -538,7 +544,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     if t1 < target6_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      GPIO.output(relay, GPIO.HIGH) # Turns relay ON
       status=True
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -547,7 +553,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     else:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -556,15 +562,15 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
   elif mode=='boost':
-    wiringpi.digitalWrite(25, 1) # sets port 25 to ON (spare LED)
-    if prevPumpMode=='boost' and time.time()-booststart>900:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+    GPIO.output(boost_led, GPIO.HIGH) # Turns boost led ON
+    if prevPumpMode=='boost' and time.time()-booststart>900:      #900 is the boost time in seconds
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       mode='auto'
-      wiringpi.digitalWrite(25, 0) # sets port 25 to OFF (spare LED)
+      GPIO.output(boost_led, GPIO.LOW) # Turns boost led OFF
     else:
       if t1 < target2_new and cpu1 < target3_new:
-        wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+        GPIO.output(relay, GPIO.HIGH) # Turns relay ON
         status=True
         print ("Current Temperature: ",t1)
         print ("CPU Temperature: ",cpu1)
@@ -573,7 +579,7 @@ def pumpUpdate(mode):
         print ("Current heat status : ",status)
         print ("Current relay mode : ",mode)
       else:
-        wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+        GPIO.output(relay, GPIO.LOW) # Turns relay OFF
         status=False
         print ("Current Temperature: ",t1)
         print ("CPU Temperature: ",cpu1)
@@ -584,7 +590,7 @@ def pumpUpdate(mode):
   elif mode=='auto':
     now = datetime.datetime.now()
     if str(now.hour) in hours and t1 < target_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      GPIO.output(relay, GPIO.HIGH) # Turns relay ON
       status=True
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -593,7 +599,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     if str(now.hour) in hours and t1 > target_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -602,7 +608,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     if str(now.hour) in hours and t1 < target_new and cpu1 > target3_new:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -611,7 +617,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     if str(now.hour) in hours and t1 > target_new and cpu1 > target3_new:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -619,9 +625,8 @@ def pumpUpdate(mode):
       print ("CPU Cap: ",target3_new)
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
-
     if str(now.hour) not in hours and t1 < target4_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 1) # sets port 0 to ON
+      GPIO.output(relay, GPIO.HIGH) # Turns relay ON
       status=True
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -630,7 +635,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     if str(now.hour) not in hours and t1 > target4_new and cpu1 < target3_new:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -639,7 +644,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     if str(now.hour) not in hours and t1 < target4_new and cpu1 > target3_new:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -648,7 +653,7 @@ def pumpUpdate(mode):
       print ("Current heat status : ",status)
       print ("Current relay mode : ",mode)
     if str(now.hour) not in hours and t1 > target4_new and cpu1 > target3_new:
-      wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+      GPIO.output(relay, GPIO.LOW) # Turns relay OFF
       status=False
       print ("Current Temperature: ",t1)
       print ("CPU Temperature: ",cpu1)
@@ -658,7 +663,7 @@ def pumpUpdate(mode):
       print ("Current relay mode : ",mode)
 
   else:
-    wiringpi.digitalWrite(0, 0) # sets port 0 to OFF
+    GPIO.output(relay, GPIO.LOW) # Turns relay OFF
     status=False
 
 # If there has been a change in state save status
