@@ -46,3 +46,8 @@ USERHASH='c7f9e589934a99848f2dba75a70b49dca6149988730389671d730e9376701adf'
 
 # Flask needs a secret key or phrase to handle login cookie
 FLASKSECRET='7e8031df78fd55cba971df8d9f5740be'
+
+#MQTT broker info
+MQTTUSER='test'
+MQTTPASS='test'
+MQTTHOST='test'
