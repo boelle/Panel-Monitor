@@ -66,7 +66,7 @@ async def main():
     mqtt_settings = Settings.MQTT(host=c.MQTTHOST, username=c.MQTTUSER, password=c.MQTTPASS)
 
 # Define the device. At least one of `identifiers` or `connections` must be supplied
-    device_info = DeviceInfo(name="Shed 1", identifiers="device_id")
+    device_info = DeviceInfo(name="Bedroom 1", identifiers="device_id")
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
