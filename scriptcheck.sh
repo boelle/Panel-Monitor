@@ -7,5 +7,5 @@ if pgrep -f "python3 /home/pi/pool/poolmain.py" &>/dev/null; then
 else
     echo -n "Current time : $(date) "
     echo "starting main script"
-    stdbuf -oL sudo python3 /home/pi/pool/poolmain.py >/dev/null  &
+    /bin/bash /home/pi/pool/launcher.sh >/dev/null  &
 fi
