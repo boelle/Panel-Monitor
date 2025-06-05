@@ -1,0 +1,6 @@
+sudo cp /home/pi/configs/hallway/hostname/hosts /etc/
+sudo cp /home/pi/configs/hallway/hostname/hostname /etc/
+sudo cp /home/pi/configs/hallway/scriptconfig/config.py /home/pi/pool
+sudo cp /home/pi/configs/hallway/scriptconfig/poolweb.py /home/pi/pool
+sudo cp /home/pi/configs/hallway/scriptconfig/poolmain.py /home/pi/pool
+sudo cp -r /home/pi/configs/hallway/tailscale/. /var/lib/tailscale/
