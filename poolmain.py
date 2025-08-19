@@ -160,7 +160,7 @@ async def main():
     def my_callback_mode(client: Client, user_data, message: MQTTMessage):
         payload = message.payload.decode()
         print('Mode changed to: ' + payload )
-        mode = [payload]
+        mode = payload
         p.pumpUpdate(mode)
         print(payload)
 
