@@ -209,6 +209,23 @@ async def main():
           # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
           mysensor3.set_state(cputemp)
 
+          # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
+          relay_sensor_info = BinarySensorInfo(name="Relay status", device_class="motion", unique_id="relay_status", device=device_info)
+          relay_settings = Settings(mqtt=mqtt_settings, entity=relay_sensor_info)
+
+          # Instantiate the sensor
+          mysensor4 = BinarySensor(relay_settings)
+
+          # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
+
+          if myPumpStatus == True:
+
+             mysensor4.on()
+
+          else:
+
+             mysensor4.off()
+            
           print('=================================================================================' )
           loopCounter=0
           program_starts = time.time()
