@@ -152,6 +152,20 @@ async def main():
     my_selection_off_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_off_target), my_callback_off_target)
     my_selection_off_target.write_config()
 
+# A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
+
+    select_info_mode = SelectInfo(name="Mode", unique_id="select_info_mode", options=["on", "boost", "off", "auto"], device=device_info)
+
+# To receive state commands from HA, define a callback function:
+    def my_callback_mode(client: Client, user_data, message: MQTTMessage):
+        payload = message.payload.decode()
+        print('Mode changed to: ' + payload )
+        mode = [payload]
+        p.pumpUpdate(mode)
+        print(payload)
+
+    my_selection_mode = Select(Settings(mqtt=mqtt_settings, entity=select_info_mode), my_callback_mode)
+    my_selection_mode.write_config()
 
     while True:
 
