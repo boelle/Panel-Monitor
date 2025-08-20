@@ -74,55 +74,75 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_day_target(client: Client, user_data, message: MQTTMessage):
+      try:
         payload = message.payload.decode()
         print('Day target changed to: ' + payload )
         target = [payload]
         p.saveTarget(target)
 
-    my_selection_day_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_day_target), my_callback_day_target)
-    my_selection_day_target.write_config()
+        my_selection_day_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_day_target), my_callback_day_target)
+        my_selection_day_target.write_config()
 
+      except Exception as ex:
+
+        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
     select_info_night_target = SelectInfo(name="Night Target", unique_id="select_info_night_target", options=["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_night_target(client: Client, user_data, message: MQTTMessage):
+      try:
         payload = message.payload.decode()
         print('Night target changed to: ' + payload )
         target4 = [payload]
         p.saveTarget4(target4)
 
-    my_selection_night_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_night_target), my_callback_night_target)
-    my_selection_night_target.write_config()
+        my_selection_night_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_night_target), my_callback_night_target)
+        my_selection_night_target.write_config()
 
+      except Exception as ex:
+
+        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
     select_info_boost_target = SelectInfo(name="Boost Target", unique_id="select_info_boost_target", options=["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_boost_target(client: Client, user_data, message: MQTTMessage):
+      try:
         payload = message.payload.decode()
         print('Boost target changed to: ' + payload )
         target2 = [payload]
         p.saveTarget2(target2)
 
-    my_selection_boost_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_boost_target), my_callback_boost_target)
-    my_selection_boost_target.write_config()
+        my_selection_boost_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_boost_target), my_callback_boost_target)
+        my_selection_boost_target.write_config()
 
+      except Exception as ex:
+
+        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
     select_info_cpu_cap = SelectInfo(name="Cpu Cap", unique_id="select_info_cpu_cap", options=["58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_cpu_cap(client: Client, user_data, message: MQTTMessage):
+      try:
         payload = message.payload.decode()
         print('Cpu Cap changed to: ' + payload )
         target3 = [payload]
         p.saveTarget3(target3)
 
-    my_selection_cpu_cap = Select(Settings(mqtt=mqtt_settings, entity=select_info_cpu_cap), my_callback_cpu_cap)
-    my_selection_cpu_cap.write_config()
+        my_selection_cpu_cap = Select(Settings(mqtt=mqtt_settings, entity=select_info_cpu_cap), my_callback_cpu_cap)
+        my_selection_cpu_cap.write_config()
+
+      except Exception as ex:
+
+        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -130,42 +150,57 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_on_target(client: Client, user_data, message: MQTTMessage):
+      try:
         payload = message.payload.decode()
         print('On target changed to: ' + payload )
         target5 = [payload]
         p.saveTarget5(target5)
 
-    my_selection_on_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_on_target), my_callback_on_target)
-    my_selection_on_target.write_config()
+        my_selection_on_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_on_target), my_callback_on_target)
+        my_selection_on_target.write_config()
 
+      except Exception as ex:
+
+        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
     select_info_off_target = SelectInfo(name="Off Target", unique_id="select_info_of_target", options=["-7", "-6", "-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6", "7", "8"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_off_target(client: Client, user_data, message: MQTTMessage):
+      try:
         payload = message.payload.decode()
         print('Off target changed to: ' + payload )
         target6 = [payload]
         p.saveTarget6(target6)
 
-    my_selection_off_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_off_target), my_callback_off_target)
-    my_selection_off_target.write_config()
+        my_selection_off_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_off_target), my_callback_off_target)
+        my_selection_off_target.write_config()
 
+      except Exception as ex:
+
+        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+          
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
     select_info_mode = SelectInfo(name="Mode", unique_id="select_info_mode", options=["on", "boost", "off", "auto"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_mode(client: Client, user_data, message: MQTTMessage):
+      try:
         payload = message.payload.decode()
         print('Mode changed to: ' + payload )
         mode = payload
         p.pumpUpdate(mode)
         
-    my_selection_mode = Select(Settings(mqtt=mqtt_settings, entity=select_info_mode), my_callback_mode)
-    my_selection_mode.write_config()
+        my_selection_mode = Select(Settings(mqtt=mqtt_settings, entity=select_info_mode), my_callback_mode)
+        my_selection_mode.write_config()
 
+      except Exception as ex:
+
+        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+          
     while True:
 
       now = time.time()
