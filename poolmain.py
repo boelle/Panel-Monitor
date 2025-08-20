@@ -162,8 +162,7 @@ async def main():
         print('Mode changed to: ' + payload )
         mode = payload
         p.pumpUpdate(mode)
-        print(payload)
-
+        
     my_selection_mode = Select(Settings(mqtt=mqtt_settings, entity=select_info_mode), my_callback_mode)
     my_selection_mode.write_config()
 
