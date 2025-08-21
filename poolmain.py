@@ -74,18 +74,13 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_day_target(client: Client, user_data, message: MQTTMessage):
-      try:
         payload = message.payload.decode()
         print('Day target changed to: ' + payload )
         target = [payload]
         p.saveTarget(target)
 
-        my_selection_day_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_day_target), my_callback_day_target)
-        my_selection_day_target.write_config()
-
-      except Exception as ex:
-
-        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    my_selection_day_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_day_target), my_callback_day_target)
+    my_selection_day_target.write_config()
     
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -93,18 +88,13 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_night_target(client: Client, user_data, message: MQTTMessage):
-      try:
         payload = message.payload.decode()
         print('Night target changed to: ' + payload )
         target4 = [payload]
         p.saveTarget4(target4)
 
-        my_selection_night_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_night_target), my_callback_night_target)
-        my_selection_night_target.write_config()
-
-      except Exception as ex:
-
-        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    my_selection_night_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_night_target), my_callback_night_target)
+    my_selection_night_target.write_config()
     
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -112,18 +102,13 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_boost_target(client: Client, user_data, message: MQTTMessage):
-      try:
         payload = message.payload.decode()
         print('Boost target changed to: ' + payload )
         target2 = [payload]
         p.saveTarget2(target2)
 
-        my_selection_boost_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_boost_target), my_callback_boost_target)
-        my_selection_boost_target.write_config()
-
-      except Exception as ex:
-
-        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    my_selection_boost_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_boost_target), my_callback_boost_target)
+    my_selection_boost_target.write_config()
     
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -131,18 +116,13 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_cpu_cap(client: Client, user_data, message: MQTTMessage):
-      try:
         payload = message.payload.decode()
         print('Cpu Cap changed to: ' + payload )
         target3 = [payload]
         p.saveTarget3(target3)
 
-        my_selection_cpu_cap = Select(Settings(mqtt=mqtt_settings, entity=select_info_cpu_cap), my_callback_cpu_cap)
-        my_selection_cpu_cap.write_config()
-
-      except Exception as ex:
-
-        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    my_selection_cpu_cap = Select(Settings(mqtt=mqtt_settings, entity=select_info_cpu_cap), my_callback_cpu_cap)
+    my_selection_cpu_cap.write_config()
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -150,18 +130,13 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_on_target(client: Client, user_data, message: MQTTMessage):
-      try:
         payload = message.payload.decode()
         print('On target changed to: ' + payload )
         target5 = [payload]
         p.saveTarget5(target5)
 
-        my_selection_on_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_on_target), my_callback_on_target)
-        my_selection_on_target.write_config()
-
-      except Exception as ex:
-
-        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    my_selection_on_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_on_target), my_callback_on_target)
+    my_selection_on_target.write_config()
     
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -169,18 +144,13 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_off_target(client: Client, user_data, message: MQTTMessage):
-      try:
         payload = message.payload.decode()
         print('Off target changed to: ' + payload )
         target6 = [payload]
         p.saveTarget6(target6)
 
-        my_selection_off_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_off_target), my_callback_off_target)
-        my_selection_off_target.write_config()
-
-      except Exception as ex:
-
-        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    my_selection_off_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_off_target), my_callback_off_target)
+    my_selection_off_target.write_config()
           
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -188,18 +158,13 @@ async def main():
 
 # To receive state commands from HA, define a callback function:
     def my_callback_mode(client: Client, user_data, message: MQTTMessage):
-      try:
         payload = message.payload.decode()
         print('Mode changed to: ' + payload )
         mode = payload
         p.pumpUpdate(mode)
         
-        my_selection_mode = Select(Settings(mqtt=mqtt_settings, entity=select_info_mode), my_callback_mode)
-        my_selection_mode.write_config()
-
-      except Exception as ex:
-
-        print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
+    my_selection_mode = Select(Settings(mqtt=mqtt_settings, entity=select_info_mode), my_callback_mode)
+    my_selection_mode.write_config()
           
     while True:
 
@@ -227,52 +192,57 @@ async def main():
           temp1,temp2=p.readTemps(mySensorIDs,c.TEMPUNIT)
           cputemp=p.cpu()
 
-          # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
-          panel_sensor_info = SensorInfo(name="Panel Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="panel_temperature", device=device_info)
-          panel_settings = Settings(mqtt=mqtt_settings, entity=panel_sensor_info)
+          try:
+            # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
+            panel_sensor_info = SensorInfo(name="Panel Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="panel_temperature", device=device_info)
+            panel_settings = Settings(mqtt=mqtt_settings, entity=panel_sensor_info)
 
-          # Instantiate the sensor
-          mysensor1 = Sensor(panel_settings)
+            # Instantiate the sensor
+            mysensor1 = Sensor(panel_settings)
 
-          # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
-          mysensor1.set_state(temp1)
+            # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
+            mysensor1.set_state(temp1)
 
-          # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
-          enclosure_sensor_info = SensorInfo(name="Enclosure Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="enclosure_temperature", device=device_info)
-          enclosure_settings = Settings(mqtt=mqtt_settings, entity=enclosure_sensor_info)
+            # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
+            enclosure_sensor_info = SensorInfo(name="Enclosure Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="enclosure_temperature", device=device_info)
+            enclosure_settings = Settings(mqtt=mqtt_settings, entity=enclosure_sensor_info)
 
-          # Instantiate the sensor
-          mysensor2 = Sensor(enclosure_settings)
+            # Instantiate the sensor
+            mysensor2 = Sensor(enclosure_settings)
 
-          # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
-          mysensor2.set_state(temp2)
+            # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
+            mysensor2.set_state(temp2)
 
-          # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
-          cpu_sensor_info = SensorInfo(name="Cpu Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="cpu_temperature", device=device_info)
-          cpu_settings = Settings(mqtt=mqtt_settings, entity=cpu_sensor_info)
+            # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
+            cpu_sensor_info = SensorInfo(name="Cpu Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="cpu_temperature", device=device_info)
+            cpu_settings = Settings(mqtt=mqtt_settings, entity=cpu_sensor_info)
 
-          # Instantiate the sensor
-          mysensor3 = Sensor(cpu_settings)
+            # Instantiate the sensor
+            mysensor3 = Sensor(cpu_settings)
 
-          # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
-          mysensor3.set_state(cputemp)
+            # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
+            mysensor3.set_state(cputemp)
 
-          # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
-          relay_sensor_info = BinarySensorInfo(name="Relay status", device_class="motion", unique_id="relay_status", device=device_info)
-          relay_settings = Settings(mqtt=mqtt_settings, entity=relay_sensor_info)
+            # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
+            relay_sensor_info = BinarySensorInfo(name="Relay status", device_class="motion", unique_id="relay_status", device=device_info)
+            relay_settings = Settings(mqtt=mqtt_settings, entity=relay_sensor_info)
 
-          # Instantiate the sensor
-          mysensor4 = BinarySensor(relay_settings)
+            # Instantiate the sensor
+            mysensor4 = BinarySensor(relay_settings)
 
-          # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
+            # Change the state of the sensor, publishing an MQTT message that gets picked up by HA
 
-          if myPumpStatus == True:
+            if myPumpStatus == True:
 
-             mysensor4.on()
+               mysensor4.on()
 
-          else:
+            else:
 
-             mysensor4.off()
+               mysensor4.off()
+
+          except Exception as ex:
+
+            print(time.asctime( time.localtime(time.time()) ) + " This error occurred: " + str(ex))
             
           print('=================================================================================' )
           loopCounter=0
