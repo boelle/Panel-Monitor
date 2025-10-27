@@ -74,7 +74,7 @@ def index():
       target6 = p.getTarget6()
       for i in range(0, len(target6)):
           target6_new=(target6[i])
-      
+
       timeStamp='{0:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())
       data={'t1': temp1,
             't2': temp2,
@@ -227,7 +227,7 @@ def target5():
     else:
       target5=p.getTarget5()
     return render_template('target5.html',target5=target5)
-    
+
 @app.route('/target6/', methods=['GET','POST'])
 def target6():
     if request.method == 'POST':
