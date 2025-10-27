@@ -33,11 +33,8 @@ TEMPUNIT='C'
 id1='take a guess'
 id2='take a guess'
 
-# Set the number of seconds between each loop.
-# This determines how often data is sent to emoncms.
-LOOPDELAY=10
-# Set the number of loops that pass before the relay is updated
-LOOPSENDDATA=3
+# Set the number of seconds that pass before the relay is updated
+LOOPSENDDATA=30
 
 # Default username and password hash
 # Use hashgenerator.py in utils to create hash for your password
@@ -51,3 +48,4 @@ FLASKSECRET='7e8031df78fd55cba971df8d9f5740be'
 MQTTUSER='test'
 MQTTPASS='test'
 MQTTHOST='test'
+HANAME='test'
