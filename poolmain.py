@@ -71,7 +71,7 @@ async def main():
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_day_target = SelectInfo(name="Day Target", unique_id="select_info_day_target" + "_" + c.HANAME, options=["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"], device=device_info)
+    select_info_day_target = SelectInfo(name="Day Target", unique_id="select_info_day_target" + "_" + c.HANAME, options=["15", "16", "17", "18", "19", "20",>
 
 # To receive state commands from HA, define a callback function:
     def my_callback_day_target(client: Client, user_data, message: MQTTMessage):
@@ -86,7 +86,7 @@ async def main():
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_night_target = SelectInfo(name="Night Target", unique_id="select_info_night_target" + "_" + c.HANAME, options=["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], device=device_>
+    select_info_night_target = SelectInfo(name="Night Target", unique_id="select_info_night_target" + "_" + c.HANAME, options=["8", "9", "10", "11", "12", ">
 
 # To receive state commands from HA, define a callback function:
     def my_callback_night_target(client: Client, user_data, message: MQTTMessage):
@@ -100,7 +100,21 @@ async def main():
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_cpu_cap = SelectInfo(name="Cpu Cap", unique_id="select_info_cpu_cap" + "_" + c.HANAME, options=["58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73"], device=device_info)
+    select_info_boost_target = SelectInfo(name="Boost Target", unique_id="select_info_boost_target" + "_" + c.HANAME, options=["15", "16", "17", "18", "19",>
+
+# To receive state commands from HA, define a callback function:
+    def my_callback_boost_target(client: Client, user_data, message: MQTTMessage):
+        payload = message.payload.decode()
+        print('Boost target changed to: ' + payload )
+        target2 = [payload]
+        p.saveTarget2(target2)
+
+    my_selection_boost_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_boost_target), my_callback_boost_target)
+    my_selection_boost_target.write_config()
+
+# A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
+
+    select_info_cpu_cap = SelectInfo(name="Cpu Cap", unique_id="select_info_cpu_cap" + "_" + c.HANAME, options=["58", "59", "60", "61", "62", "63", "64", "6>
 
 # To receive state commands from HA, define a callback function:
     def my_callback_cpu_cap(client: Client, user_data, message: MQTTMessage):
@@ -114,7 +128,7 @@ async def main():
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_on_target = SelectInfo(name="On Target", unique_id="select_info_on_target" + "_" + c.HANAME, options=["93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108"], device=devic>
+    select_info_on_target = SelectInfo(name="On Target", unique_id="select_info_on_target" + "_" + c.HANAME, options=["93", "94", "95", "96", "97", "98", "9>
 
 # To receive state commands from HA, define a callback function:
     def my_callback_on_target(client: Client, user_data, message: MQTTMessage):
@@ -128,7 +142,7 @@ async def main():
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_off_target = SelectInfo(name="Off Target", unique_id="select_info_of_target" + "_" + c.HANAME, options=["-7", "-6", "-5", "-4", "-3", "-2", "-1", "0", "1", "2", "3", "4", "5", "6", "7", "8"], device=device_info)
+    select_info_off_target = SelectInfo(name="Off Target", unique_id="select_info_of_target" + "_" + c.HANAME, options=["-7", "-6", "-5", "-4", "-3", "-2", >
 
 # To receive state commands from HA, define a callback function:
     def my_callback_off_target(client: Client, user_data, message: MQTTMessage):
@@ -182,7 +196,7 @@ async def main():
 
           try:
             # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
-            panel_sensor_info = SensorInfo(name="Panel Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="panel_temperature" + "_" + c.HANAME, device=device_info)
+            panel_sensor_info = SensorInfo(name="Panel Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="panel_temperature" + ">
             panel_settings = Settings(mqtt=mqtt_settings, entity=panel_sensor_info)
 
             # Instantiate the sensor
@@ -192,7 +206,7 @@ async def main():
             mysensor1.set_state(temp1)
 
             # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
-            enclosure_sensor_info = SensorInfo(name="Enclosure Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="enclosure_temperature" + "_" + c.HANAME, device=device_info)
+            enclosure_sensor_info = SensorInfo(name="Enclosure Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="enclosure_temp>
             enclosure_settings = Settings(mqtt=mqtt_settings, entity=enclosure_sensor_info)
 
             # Instantiate the sensor
@@ -202,7 +216,7 @@ async def main():
             mysensor2.set_state(temp2)
 
             # An additional sensor can be added to the same device, by re-using the DeviceInfo instance previously defined
-            cpu_sensor_info = SensorInfo(name="Cpu Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="cpu_temperature" + "_" + c.HANAME, device=device_info)
+            cpu_sensor_info = SensorInfo(name="Cpu Temperature", device_class="temperature", unit_of_measurement="°C", unique_id="cpu_temperature" + "_" + c>
             cpu_settings = Settings(mqtt=mqtt_settings, entity=cpu_sensor_info)
 
             # Instantiate the sensor
@@ -238,10 +252,6 @@ async def main():
           program_starts = time.time()
 
     await asyncio.sleep(1)
-
-if __name__ == '__main__':
-  asyncio.run(main())
-
 
 if __name__ == '__main__':
   asyncio.run(main())
