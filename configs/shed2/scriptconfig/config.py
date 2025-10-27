@@ -30,7 +30,7 @@
 TEMPUNIT='C'
 
 #Sensor id
-id1='28-0301a27941b0'
+id1='28-0301a279e641'
 id2='28-00000bbf22ae'
 
 # Set the number of seconds that pass before the relay is updated
