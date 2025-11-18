@@ -86,8 +86,7 @@ async def main():
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_night_target = SelectInfo(name="Night Target", unique_id="select_info_night_target" + "_" + c.HANAME, options=["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], device=device_i
-nfo)
+    select_info_night_target = SelectInfo(name="Night Target", unique_id="select_info_night_target" + "_" + c.HANAME, options=["8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_night_target(client: Client, user_data, message: MQTTMessage):
@@ -101,8 +100,7 @@ nfo)
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_boost_target = SelectInfo(name="Boost Target", unique_id="select_info_boost_target" + "_" + c.HANAME, options=["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"], device=device
-_info)
+    select_info_boost_target = SelectInfo(name="Boost Target", unique_id="select_info_boost_target" + "_" + c.HANAME, options=["15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_boost_target(client: Client, user_data, message: MQTTMessage):
