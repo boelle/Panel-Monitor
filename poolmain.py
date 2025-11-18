@@ -128,8 +128,7 @@ async def main():
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
-    select_info_on_target = SelectInfo(name="On Target", unique_id="select_info_on_target" + "_" + c.HANAME, options=["93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108"], device=device
-_info)
+    select_info_on_target = SelectInfo(name="On Target", unique_id="select_info_on_target" + "_" + c.HANAME, options=["93", "94", "95", "96", "97", "98", "99", "100", "101", "102", "103", "104", "105", "106", "107", "108"], device=device_info)
 
 # To receive state commands from HA, define a callback function:
     def my_callback_on_target(client: Client, user_data, message: MQTTMessage):
