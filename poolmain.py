@@ -82,7 +82,8 @@ async def main():
 
     my_selection_day_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_day_target), my_callback_day_target)
     my_selection_day_target.write_config()
-
+    target_day = target[0]
+    my_selection_day_target.set_options(target_day)
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -97,6 +98,8 @@ async def main():
 
     my_selection_night_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_night_target), my_callback_night_target)
     my_selection_night_target.write_config()
+    target_night = target4[0]
+    my_selection_night_target.set_options(target_night)
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -111,6 +114,8 @@ async def main():
 
     my_selection_boost_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_boost_target), my_callback_boost_target)
     my_selection_boost_target.write_config()
+    target_boost = target2[0]
+    my_selection_boost_target.set_options(target_boost)
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -125,6 +130,8 @@ async def main():
 
     my_selection_cpu_cap = Select(Settings(mqtt=mqtt_settings, entity=select_info_cpu_cap), my_callback_cpu_cap)
     my_selection_cpu_cap.write_config()
+    target_cpu = target3[0]
+    my_selection_cpu_cap.set_options(target_cpu)
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -139,6 +146,8 @@ async def main():
 
     my_selection_on_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_on_target), my_callback_on_target)
     my_selection_on_target.write_config()
+    target_on = target5[0]
+    my_selection_on_target.set_options(target_on)
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -153,6 +162,8 @@ async def main():
 
     my_selection_off_target = Select(Settings(mqtt=mqtt_settings, entity=select_info_off_target), my_callback_off_target)
     my_selection_off_target.write_config()
+    target_off = target6[0]
+    my_selection_off_target.set_options(target_off)
 
 # A selection list can be added to the same device, by re-using the DeviceInfo instance previously defined
 
@@ -167,7 +178,8 @@ async def main():
 
     my_selection_mode = Select(Settings(mqtt=mqtt_settings, entity=select_info_mode), my_callback_mode)
     my_selection_mode.write_config()
-
+    my_selection_mode.set_options(myPumpMode)
+    
     while True:
 
       now = time.time()
