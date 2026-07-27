@@ -60,8 +60,17 @@ loopSendData=c.LOOPSENDDATA
 
 async def main():
 
+    target=p.getTarget()
+    target2=p.getTarget2()
+    target3=p.getTarget3()
+    target4=p.getTarget4()
+    target5=p.getTarget5()
+    target6=p.getTarget6()
+    myPumpMode,myPumpStatus,booststart=p.getStatus()
+
     program_starts = time.time()
     loopCounter=0
+
 
 # Configure the required parameters for the MQTT broker
     mqtt_settings = Settings.MQTT(host=c.MQTTHOST, username=c.MQTTUSER, password=c.MQTTPASS)
