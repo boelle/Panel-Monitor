@@ -71,7 +71,6 @@ async def main():
     program_starts = time.time()
     loopCounter=0
 
-
 # Configure the required parameters for the MQTT broker
     mqtt_settings = Settings.MQTT(host=c.MQTTHOST, username=c.MQTTUSER, password=c.MQTTPASS)
 
